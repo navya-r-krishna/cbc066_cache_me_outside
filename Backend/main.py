@@ -1,11 +1,24 @@
+import os
+import sys
 import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+# Ensure root project directory and Backend directory are in sys.path
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
+
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+if BACKEND_DIR not in sys.path:
+    sys.path.insert(0, BACKEND_DIR)
+
 from config import get_settings
 from db import connect_to_mongo, close_mongo_connection
+from routes.plans import router as plans_router
+from routes.questions import router as questions_router
 
 # Shared AI Models state (Loaded once at startup)
 app_state = {}
@@ -21,11 +34,13 @@ async def lifespan(app: FastAPI):
     # 1. Connect to MongoDB
     await connect_to_mongo()
     
-    # 2. Warm up embedding model for De-duplication (Task 3 preview)
+    # 2. Warm up embedding model for De-duplication
     try:
         logger.info(f"Loading embedding model: {settings.EMBEDDING_MODEL_NAME}...")
         from sentence_transformers import SentenceTransformer
-        app_state["embedding_model"] = SentenceTransformer(settings.EMBEDDING_MODEL_NAME)
+        model_instance = SentenceTransformer(settings.EMBEDDING_MODEL_NAME)
+        app_state["embedding_model"] = model_instance
+        app.state.embedding_model = model_instance
         logger.info("Embedding model loaded successfully!")
     except Exception as e:
         logger.warning(f"Could not load SentenceTransformer on startup: {e}")
@@ -52,6 +67,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include Routers
+app.include_router(plans_router)
+app.include_router(questions_router)
 
 # Standardized Global Error Handler for Frontend Consistency
 @app.exception_handler(Exception)

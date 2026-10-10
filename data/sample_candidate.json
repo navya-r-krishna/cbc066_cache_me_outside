@@ -1,0 +1,25 @@
+[
+    {
+        "_id": "cand_dev_01",
+        "raw_resume_markdown": "# Candidate Profile\nExperienced developer with 3 years building Python web applications and optimizing SQL databases.",
+        "extracted_skills": [
+            "Python",
+            "SQL",
+            "REST APIs"
+        ],
+        "experience_years": 3.0,
+        "education": [
+            "B.Tech Computer Science"
+        ],
+        "score": 82.5,
+        "band": "intermediate",
+        "gaps": [
+            "MongoDB",
+            "FastAPI"
+        ],
+        "strengths": [
+            "Python",
+            "SQL"
+        ]
+    }
+]

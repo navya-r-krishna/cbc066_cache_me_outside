@@ -1,0 +1,54 @@
+[
+    {
+        "_id": "job_dev_01",
+        "title": "Backend Python Developer",
+        "raw_text": "We are seeking a Backend Developer with strong Python, FastAPI, SQL query optimization, and MongoDB experience. Minimum 3 years experience required.",
+        "skills": [
+            {
+                "skill": "Python",
+                "weight": 0.35,
+                "level": "required",
+                "evidence": "Core requirement"
+            },
+            {
+                "skill": "FastAPI",
+                "weight": 0.25,
+                "level": "required",
+                "evidence": "Required framework"
+            },
+            {
+                "skill": "SQL",
+                "weight": 0.25,
+                "level": "required",
+                "evidence": "Mentioned 3+ years"
+            },
+            {
+                "skill": "MongoDB",
+                "weight": 0.15,
+                "level": "preferred",
+                "evidence": "Preferred database"
+            }
+        ],
+        "competency_groups": [
+            {
+                "competency": "Technical",
+                "skills": [
+                    "Python",
+                    "FastAPI",
+                    "SQL",
+                    "MongoDB"
+                ],
+                "total_weight": 1.0
+            }
+        ],
+        "low_info": false
+    },
+    {
+        "_id": "job_thin_02",
+        "title": "Software Intern",
+        "raw_text": "Looking for a software intern.",
+        "skills": [],
+        "competency_groups": [],
+        "low_info": true
+    }
+]
