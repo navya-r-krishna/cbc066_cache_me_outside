@@ -17,8 +17,6 @@ class Settings(BaseSettings):
     # AI Service (Google Gemini)
     GEMINI_API_KEY: str = ""
     GEMINI_MODEL: str = "gemini-2.5-flash"
-    DEDUP_THRESHOLD: float = 0.85
-
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
@@ -29,10 +27,6 @@ class Settings(BaseSettings):
             return v
         return ["*"]
 
-    @property
-    def MONGODB_URL(self) -> str:
-        return self.MONGODB_URI
-
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
@@ -41,8 +35,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-
-
-def get_settings() -> Settings:
-    return settings
-
