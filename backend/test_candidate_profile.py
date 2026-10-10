@@ -1,14 +1,40 @@
 
-from backend.services.candidate_profile import (
-    calculate_role_relevance,
-    extract_requested_years,
-    calculate_relevant_internship_months,
-)
-from backend.services.resume_parser import (
-    extract_dates,
-    extract_date_ranges,
-    parse_resume_text,
-)
+try:
+    from Backend.services.candidate_profile import (
+        calculate_role_relevance,
+        extract_requested_years,
+        calculate_relevant_internship_months,
+    )
+    from Backend.services.resume_parser import (
+        extract_dates,
+        extract_date_ranges,
+        parse_resume_text,
+    )
+except ImportError:
+    try:
+        from backend.services.candidate_profile import (
+            calculate_role_relevance,
+            extract_requested_years,
+            calculate_relevant_internship_months,
+        )
+        from backend.services.resume_parser import (
+            extract_dates,
+            extract_date_ranges,
+            parse_resume_text,
+        )
+    except ImportError:
+        from services.candidate_profile import (
+            calculate_role_relevance,
+            extract_requested_years,
+            calculate_relevant_internship_months,
+        )
+        from services.resume_parser import (
+            extract_dates,
+            extract_date_ranges,
+            parse_resume_text,
+        )
+
+
 
 
 # --------------------------------------------------

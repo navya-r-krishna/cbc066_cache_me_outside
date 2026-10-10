@@ -6,7 +6,11 @@ import logging
 from fastapi.responses import Response
 from services.export import generate_plan_pdf
 
-from db import get_database
+try:
+    from db import get_database
+except ImportError:
+    from Backend.db import get_database
+
 from models.schemas import InterviewPlan, PlanSettings
 from services.assembly import assemble_interview_plan
 from services.dedup import batch_embed_questions

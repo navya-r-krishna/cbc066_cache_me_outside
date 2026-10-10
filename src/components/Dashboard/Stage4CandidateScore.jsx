@@ -171,12 +171,157 @@ export function Stage4CandidateScore({ onBack, onRestart }) {
               <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--color-primary)', lineHeight: 1.1 }}>
                 {candidateSummary.score}%
               </div>
-              <span className="badge badge-success" style={{ fontSize: 9.5, marginTop: 2 }}>
-                Recommended for Interview
+              <span
+                className={`badge ${
+                  workflowData.candidateSummary?.comparison?.candidate_band?.includes('strong')
+                    ? 'badge-success'
+                    : 'badge-forest'
+                }`}
+                style={{ fontSize: 9.5, marginTop: 2, textTransform: 'uppercase' }}
+              >
+                {workflowData.candidateSummary?.band || 'Provisional Match'}
               </span>
             </div>
           </div>
         </div>
+
+        {/* ===================================================================== */}
+        {/* ANALYSIS A: FACTOR SCORES & CANDIDATE BREAKDOWN (Banavi's Backend) */}
+        {/* ===================================================================== */}
+        {workflowData.candidateSummary?.comparison && (
+          <div
+            style={{
+              padding: '12px 14px',
+              borderRadius: 'var(--radius-sm)',
+              background: 'var(--color-surface-subtle)',
+              border: '1px solid var(--color-border)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 10,
+              flexShrink: 0,
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 6 }}>
+              <div style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--color-primary)' }}>
+                Analysis A Evaluation Breakdown (Weighted Factors & Candidate Evidence)
+              </div>
+              {workflowData.candidateSummary.comparison.provisional && (
+                <span className="badge badge-sage" style={{ fontSize: 10 }}>
+                  Provisional Scoring Active
+                </span>
+              )}
+            </div>
+
+            {/* Factor Scores Grid (Skills 40%, Experience 30%, Role Relevance 20%, Academics 10%) */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                gap: 8,
+              }}
+            >
+              {[
+                {
+                  label: 'Skills Fit (40%)',
+                  val: workflowData.candidateSummary.comparison.factor_scores?.skills,
+                  suffix: '%',
+                },
+                {
+                  label: 'Experience (30%)',
+                  val: workflowData.candidateSummary.comparison.factor_scores?.experience,
+                  suffix: '%',
+                },
+                {
+                  label: 'Role Relevance (20%)',
+                  val: workflowData.candidateSummary.comparison.factor_scores?.role_relevance,
+                  suffix: '%',
+                },
+                {
+                  label: 'Academics (10%)',
+                  val: workflowData.candidateSummary.comparison.factor_scores?.academics,
+                  suffix: workflowData.candidateSummary.comparison.factor_scores?.academics != null ? '%' : 'N/A',
+                },
+              ].map((f, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: '#FFFFFF',
+                    padding: '8px 10px',
+                    borderRadius: 'var(--radius-xs)',
+                    border: '1px solid var(--color-border)',
+                    textAlign: 'center',
+                  }}
+                >
+                  <div style={{ fontSize: 10, color: 'var(--color-text-secondary)', fontWeight: 600 }}>{f.label}</div>
+                  <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--color-primary)', marginTop: 2 }}>
+                    {f.val != null ? `${Math.round(f.val)}${f.suffix}` : 'Unassessed'}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Strengths & Skill Gaps split */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 10 }}>
+              {/* Strengths */}
+              <div
+                style={{
+                  background: '#FFFFFF',
+                  padding: '8px 12px',
+                  borderRadius: 'var(--radius-xs)',
+                  border: '1px solid var(--color-border)',
+                }}
+              >
+                <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-primary)', marginBottom: 4 }}>
+                  Identified Candidate Strengths ({workflowData.candidateSummary.comparison.strengths?.length || 0})
+                </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                  {(workflowData.candidateSummary.comparison.strengths || []).map((str, idx) => (
+                    <span key={idx} className="badge badge-forest" style={{ fontSize: 10 }}>
+                      ✓ {str}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Skill Gaps */}
+              <div
+                style={{
+                  background: '#FFFFFF',
+                  padding: '8px 12px',
+                  borderRadius: 'var(--radius-xs)',
+                  border: '1px solid var(--color-border)',
+                }}
+              >
+                <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-primary)', marginBottom: 4 }}>
+                  Skill Gaps & Target Areas ({workflowData.candidateSummary.comparison.skill_gaps?.length || 0})
+                </div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                  {(workflowData.candidateSummary.comparison.skill_gaps || []).map((gap, idx) => (
+                    <span key={idx} className="badge badge-sage" style={{ fontSize: 10 }}>
+                      ! {gap.name || gap} {gap.competency ? `(${gap.competency})` : ''}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Experience Breakdown & Disclaimers */}
+            {workflowData.candidateSummary.comparison.experience_breakdown && (
+              <div style={{ fontSize: 10.5, color: 'var(--color-text-secondary)', display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+                <span>
+                  <strong>Professional Experience:</strong> {workflowData.candidateSummary.comparison.experience_breakdown.professional_months || 0} mos
+                </span>
+                <span>
+                  <strong>Relevant Internships:</strong> {workflowData.candidateSummary.comparison.experience_breakdown.relevant_internship_months || 0} mos (50% credit factor)
+                </span>
+                <span>
+                  <strong>Equivalent Total:</strong> {workflowData.candidateSummary.comparison.experience_breakdown.equivalent_experience_months || 0} mos
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+
 
 
 

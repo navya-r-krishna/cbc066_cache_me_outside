@@ -351,6 +351,50 @@ export async function regenerateQuestion(question, context = {}) {
 }
 
 /**
+ * Backend Analysis A: Perform Unified Candidate & Job Analysis
+ * Calls FastAPI POST /api/analysis/candidate
+ */
+export async function analyzeCandidateBackend({ role_title, job_description, resume_text, resume_pdf_path }) {
+  const config = getApiConfig();
+  const baseUrl = (config.apiBaseUrl || 'http://localhost:8000').replace(/\/api\/v1\/?$/, '').replace(/\/+$/, '');
+
+  const response = await fetch(`${baseUrl}/api/analysis/candidate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({ role_title, job_description, resume_text, resume_pdf_path }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.detail || `Candidate analysis failed with status ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+/**
+ * Backend Analysis A: Update Job Skill Weights
+ * Calls FastAPI PATCH /api/jobs/{job_id}/skills
+ */
+export async function updateJobSkillsBackend(jobId, skillsList) {
+  const config = getApiConfig();
+  const baseUrl = (config.apiBaseUrl || 'http://localhost:8000').replace(/\/api\/v1\/?$/, '').replace(/\/+$/, '');
+
+  const response = await fetch(`${baseUrl}/api/jobs/${jobId}/skills`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({ skills: skillsList }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.detail || `Skill update failed with status ${response.status}`);
+  }
+
+  return await response.json();
+}
+
+/**
  * Stage 2: Extract Skills, Evaluate Evidence & Fit Summary
  */
 export async function extractSkillsAndProfile({
@@ -362,6 +406,70 @@ export async function extractSkillsAndProfile({
   difficulty = 'Auto',
 }, { onProgress } = {}) {
   const config = getApiConfig();
+
+  // Try connecting to Analysis A backend API first!
+  try {
+    if (onProgress) onProgress({ step: 1, message: 'Connecting to Analysis A backend (FastAPI)...' });
+
+    const backendResult = await analyzeCandidateBackend({
+      role_title: jobTitle,
+      job_description: jobDescription,
+      resume_text: candidateProfile || 'Candidate experience in software engineering.',
+    });
+
+    if (backendResult?.success && backendResult?.data) {
+      const { candidate_profile, job_analysis, comparison } = backendResult.data;
+
+      const weightedSkills = job_analysis?.weighted_skills || [];
+      const skills = weightedSkills.map((sk, idx) => {
+        const evMatch = candidate_profile?.skill_evidence?.find(
+          (e) => e.skill.toLowerCase() === sk.name.toLowerCase()
+        );
+        return {
+          id: `sk-${idx + 1}`,
+          name: sk.name,
+          category: sk.competency || 'Technical Skills',
+          status: sk.weight >= 0.8 ? 'required' : 'preferred',
+          weight: sk.weight,
+          normalized_weight: sk.normalized_weight,
+          evidence: evMatch
+            ? `Evidence (${evMatch.confidence} confidence): ${evMatch.evidence}`
+            : `Extracted requirement for ${sk.competency || 'Role'}.`,
+        };
+      });
+
+      const candidateSummary = {
+        candidateName: resumeFileName ? resumeFileName.replace(/\.[^/.]+$/, '') : 'Candidate',
+        score: comparison?.overall_score != null ? Math.round(comparison.overall_score) : 88,
+        band: comparison?.candidate_band ? comparison.candidate_band.replace(/_/g, ' ').toUpperCase() : 'PROVISIONAL MATCH',
+        strengths: comparison?.strengths || [],
+        gaps: (comparison?.skill_gaps || []).map((g) => `${g.name} (${g.competency})`),
+        lowInfo: job_analysis?.low_info || false,
+        comparison: comparison,
+        candidate_profile: candidate_profile,
+        job_analysis: job_analysis,
+      };
+
+      if (onProgress) onProgress({ step: 3, message: 'Analysis A complete! Syncing candidate profile...' });
+
+      return {
+        success: true,
+        isMock: false,
+        skills,
+        candidateSummary,
+        comparison,
+        jobAnalysis: job_analysis,
+        candidateProfile: candidate_profile,
+        defaultWeights: {
+          technical: 50,
+          experience: 35,
+          academic: 15,
+        },
+      };
+    }
+  } catch (backendErr) {
+    console.warn('Backend Analysis A endpoint unreachable, using local processing:', backendErr.message);
+  }
 
   if (onProgress) onProgress({ step: 1, message: 'Analyzing job description requirements...' });
   await new Promise((r) => setTimeout(r, 300));
@@ -378,6 +486,7 @@ export async function extractSkillsAndProfile({
   // Derive candidate name
   const nameMatch = candidateProfile.match(/Candidate:\s*([^\n\r,]+)/i);
   const candidateName = nameMatch ? nameMatch[1].trim() : resumeFileName ? resumeFileName.replace(/\.[^/.]+$/, '') : 'Candidate';
+
 
   // Domain skills synthesis
   let skills = [];

@@ -2,7 +2,11 @@ import numpy as np
 from typing import List, Tuple, Dict, Any, Optional
 import logging
 
-from config import get_settings
+try:
+    from config import get_settings
+except ImportError:
+    from Backend.config import get_settings
+
 
 logger = logging.getLogger("uvicorn")
 settings = get_settings()

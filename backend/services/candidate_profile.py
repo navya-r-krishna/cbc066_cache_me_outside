@@ -5,7 +5,11 @@ import re
 try:
     from .resume_parser import parse_resume_text, parse_resume_pdf
 except ImportError:
-    from resume_parser import parse_resume_text, parse_resume_pdf
+    try:
+        from Backend.services.resume_parser import parse_resume_text, parse_resume_pdf
+    except ImportError:
+        from resume_parser import parse_resume_text, parse_resume_pdf
+
 
 
 # --------------------------------------------------

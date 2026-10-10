@@ -10,7 +10,11 @@ import fitz
 try:
     from .skill_matcher import match_skills
 except ImportError:
-    from skill_matcher import match_skills
+    try:
+        from Backend.services.skill_matcher import match_skills
+    except ImportError:
+        from skill_matcher import match_skills
+
 
 
 # --------------------------------------------------

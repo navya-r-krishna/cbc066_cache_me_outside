@@ -3,7 +3,11 @@ from typing import Dict, Any, Optional
 from bson import ObjectId
 import logging
 
-from db import get_database
+try:
+    from db import get_database
+except ImportError:
+    from Backend.db import get_database
+
 from services.feedback import log_feedback_action
 from services.dedup import is_duplicate, embed_text
 

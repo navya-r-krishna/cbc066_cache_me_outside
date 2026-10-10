@@ -8,7 +8,11 @@ from typing import Any
 try:
     from .skill_matcher import match_skills
 except ImportError:
-    from skill_matcher import match_skills
+    try:
+        from Backend.services.skill_matcher import match_skills
+    except ImportError:
+        from skill_matcher import match_skills
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent

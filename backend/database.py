@@ -5,7 +5,11 @@ from pymongo.errors import PyMongoError
 try:
     from .config import settings
 except ImportError:
-    from config import settings
+    try:
+        from Backend.config import settings
+    except ImportError:
+        from config import settings
+
 
 
 client = MongoClient(

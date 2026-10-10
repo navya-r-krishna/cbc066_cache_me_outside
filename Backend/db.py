@@ -1,6 +1,13 @@
 import logging
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
-from config import get_settings
+try:
+    from .config import get_settings
+except ImportError:
+    try:
+        from Backend.config import get_settings
+    except ImportError:
+        from config import get_settings
+
 
 logger = logging.getLogger("uvicorn")
 

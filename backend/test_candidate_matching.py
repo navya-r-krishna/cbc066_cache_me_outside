@@ -1,8 +1,24 @@
-from services.candidate_profile import (
-    build_candidate_profile,
-    compare_candidate_to_job,
-)
-from services.skill_analysis import analyze_job
+try:
+    from Backend.services.candidate_profile import (
+        build_candidate_profile,
+        compare_candidate_to_job,
+    )
+    from Backend.services.skill_analysis import analyze_job
+except ImportError:
+    try:
+        from backend.services.candidate_profile import (
+            build_candidate_profile,
+            compare_candidate_to_job,
+        )
+        from backend.services.skill_analysis import analyze_job
+    except ImportError:
+        from services.candidate_profile import (
+            build_candidate_profile,
+            compare_candidate_to_job,
+        )
+        from services.skill_analysis import analyze_job
+
+
 
 
 sample_resume = """
