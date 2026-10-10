@@ -1,0 +1,1712 @@
+{
+    "skills": [
+        {
+            "name": "Python",
+            "synonyms": [
+                "python programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Java",
+            "synonyms": [
+                "Java programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "JavaScript",
+            "synonyms": [
+                "JS",
+                "ECMAScript"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "TypeScript",
+            "synonyms": [
+                "TS"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "C",
+            "synonyms": [
+                "C language",
+                "C programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "C++",
+            "synonyms": [
+                "cpp",
+                "cplusplus"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "C#",
+            "synonyms": [
+                "C Sharp",
+                "C-Sharp"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Go",
+            "synonyms": [
+                "Golang"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "R",
+            "synonyms": [
+                "R programming",
+                "R language"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "PHP",
+            "synonyms": [
+                "PHP programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Ruby",
+            "synonyms": [
+                "Ruby programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Kotlin",
+            "synonyms": [
+                "Kotlin programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Swift",
+            "synonyms": [
+                "Swift programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Rust",
+            "synonyms": [
+                "Rust programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Dart",
+            "synonyms": [
+                "Dart programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Scala",
+            "synonyms": [
+                "Scala programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Bash",
+            "synonyms": [
+                "Bash scripting",
+                "Shell scripting"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Object-Oriented Programming",
+            "synonyms": [
+                "OOP",
+                "Object Oriented Programming"
+            ],
+            "competency": "Programming Fundamentals"
+        },
+        {
+            "name": "Data Structures and Algorithms",
+            "synonyms": [
+                "DSA",
+                "Data Structures",
+                "Algorithms"
+            ],
+            "competency": "Core CS"
+        },
+        {
+            "name": "Problem Solving",
+            "synonyms": [
+                "Analytical Problem Solving"
+            ],
+            "competency": "Core CS"
+        },
+        {
+            "name": "Operating Systems",
+            "synonyms": [
+                "OS",
+                "Operating System Concepts"
+            ],
+            "competency": "Core CS"
+        },
+        {
+            "name": "Computer Networks",
+            "synonyms": [
+                "Networking",
+                "Computer Networking"
+            ],
+            "competency": "Core CS"
+        },
+        {
+            "name": "Database Management Systems",
+            "synonyms": [
+                "DBMS",
+                "Database Systems"
+            ],
+            "competency": "Core CS"
+        },
+        {
+            "name": "SQL",
+            "synonyms": [
+                "Structured Query Language"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "MySQL",
+            "synonyms": [
+                "My SQL"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "PostgreSQL",
+            "synonyms": [
+                "Postgres"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "SQLite",
+            "synonyms": [
+                "SQLite Database"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "Microsoft SQL Server",
+            "synonyms": [
+                "SQL Server",
+                "MSSQL"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "Oracle Database",
+            "synonyms": [
+                "Oracle DB",
+                "Oracle SQL"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "MongoDB",
+            "synonyms": [
+                "Mongo DB"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "Redis",
+            "synonyms": [
+                "Redis Cache"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "Cassandra",
+            "synonyms": [
+                "Apache Cassandra"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "Database Design",
+            "synonyms": [
+                "Database Modeling",
+                "Schema Design"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "Database Normalization",
+            "synonyms": [
+                "Normalization"
+            ],
+            "competency": "Databases"
+        },
+        {
+            "name": "Excel",
+            "synonyms": [
+                "Microsoft Excel",
+                "MS Excel",
+                "Excel spreadsheets"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Advanced Excel",
+            "synonyms": [
+                "Excel Pivot Tables",
+                "Excel VLOOKUP"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Pandas",
+            "synonyms": [
+                "Python Pandas"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "NumPy",
+            "synonyms": [
+                "Numerical Python"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Data Cleaning",
+            "synonyms": [
+                "Data Cleansing",
+                "Data Preprocessing"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Exploratory Data Analysis",
+            "synonyms": [
+                "EDA",
+                "Exploratory Analysis"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Data Visualization",
+            "synonyms": [
+                "Data Viz",
+                "Data Visualisation"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Statistical Analysis",
+            "synonyms": [
+                "Statistics",
+                "Statistical Modeling"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Probability",
+            "synonyms": [
+                "Probability Theory"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Hypothesis Testing",
+            "synonyms": [
+                "Statistical Hypothesis Testing"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "A/B Testing",
+            "synonyms": [
+                "AB Testing",
+                "Split Testing"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Power BI",
+            "synonyms": [
+                "Microsoft Power BI"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Tableau",
+            "synonyms": [
+                "Tableau Desktop"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Looker Studio",
+            "synonyms": [
+                "Google Data Studio"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Business Intelligence",
+            "synonyms": [
+                "BI",
+                "BI Reporting"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Data Reporting",
+            "synonyms": [
+                "Reporting",
+                "Analytical Reporting"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "KPI Analysis",
+            "synonyms": [
+                "Key Performance Indicators",
+                "KPI Tracking"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "ETL",
+            "synonyms": [
+                "Extract Transform Load",
+                "ETL Pipelines"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Data Warehousing",
+            "synonyms": [
+                "Data Warehouse"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Apache Spark",
+            "synonyms": [
+                "Spark",
+                "PySpark"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Apache Kafka",
+            "synonyms": [
+                "Kafka"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Machine Learning",
+            "synonyms": [
+                "ML"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Deep Learning",
+            "synonyms": [
+                "DL"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Natural Language Processing",
+            "synonyms": [
+                "NLP"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Computer Vision",
+            "synonyms": [
+                "CV",
+                "Image Recognition"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Scikit-learn",
+            "synonyms": [
+                "sklearn",
+                "scikit learn"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "TensorFlow",
+            "synonyms": [
+                "Tensor Flow"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "PyTorch",
+            "synonyms": [
+                "Torch"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Keras",
+            "synonyms": [
+                "Keras API"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Linear Regression",
+            "synonyms": [
+                "Linear Regression Modeling"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Logistic Regression",
+            "synonyms": [
+                "Logistic Classifier"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Decision Trees",
+            "synonyms": [
+                "Decision Tree"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Random Forest",
+            "synonyms": [
+                "Random Forest Classifier"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Clustering",
+            "synonyms": [
+                "Cluster Analysis"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Feature Engineering",
+            "synonyms": [
+                "Feature Extraction"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Model Evaluation",
+            "synonyms": [
+                "Model Validation",
+                "Model Performance Evaluation"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Generative AI",
+            "synonyms": [
+                "GenAI",
+                "Generative Artificial Intelligence"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Large Language Models",
+            "synonyms": [
+                "LLMs",
+                "Large Language Model"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Prompt Engineering",
+            "synonyms": [
+                "Prompt Design"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Retrieval-Augmented Generation",
+            "synonyms": [
+                "RAG",
+                "Retrieval Augmented Generation"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "LangChain",
+            "synonyms": [
+                "Lang Chain"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Vector Databases",
+            "synonyms": [
+                "Vector DB",
+                "Vector Database"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "HTML",
+            "synonyms": [
+                "HTML5",
+                "HyperText Markup Language"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "CSS",
+            "synonyms": [
+                "CSS3",
+                "Cascading Style Sheets"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "React",
+            "synonyms": [
+                "React.js",
+                "ReactJS"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Angular",
+            "synonyms": [
+                "Angular Framework"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Vue.js",
+            "synonyms": [
+                "Vue",
+                "VueJS"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Next.js",
+            "synonyms": [
+                "NextJS",
+                "Next"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Bootstrap",
+            "synonyms": [
+                "Bootstrap CSS"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Tailwind CSS",
+            "synonyms": [
+                "Tailwind"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Responsive Web Design",
+            "synonyms": [
+                "Responsive Design",
+                "Mobile-First Design"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Node.js",
+            "synonyms": [
+                "NodeJS"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "Express.js",
+            "synonyms": [
+                "Express",
+                "ExpressJS"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "FastAPI",
+            "synonyms": [
+                "Fast API"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "Django",
+            "synonyms": [
+                "Django Framework"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "Flask",
+            "synonyms": [
+                "Flask Framework"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "Spring Boot",
+            "synonyms": [
+                "SpringBoot"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "REST APIs",
+            "synonyms": [
+                "REST API",
+                "RESTful API",
+                "RESTful APIs"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "GraphQL",
+            "synonyms": [
+                "Graph QL"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "API Development",
+            "synonyms": [
+                "API Design",
+                "API Integration"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "Authentication",
+            "synonyms": [
+                "User Authentication",
+                "Identity Verification"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "Authorization",
+            "synonyms": [
+                "Access Control",
+                "Role-Based Access Control"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "JSON",
+            "synonyms": [
+                "JavaScript Object Notation"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "Microservices",
+            "synonyms": [
+                "Microservice Architecture"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "Git",
+            "synonyms": [
+                "Git Version Control"
+            ],
+            "competency": "Software Engineering"
+        },
+        {
+            "name": "GitHub",
+            "synonyms": [
+                "GitHub Repositories"
+            ],
+            "competency": "Software Engineering"
+        },
+        {
+            "name": "GitLab",
+            "synonyms": [
+                "GitLab Repositories"
+            ],
+            "competency": "Software Engineering"
+        },
+        {
+            "name": "Linux",
+            "synonyms": [
+                "Linux Administration"
+            ],
+            "competency": "Software Engineering"
+        },
+        {
+            "name": "Docker",
+            "synonyms": [
+                "Docker Containers",
+                "Containerization"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Kubernetes",
+            "synonyms": [
+                "K8s"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "CI/CD",
+            "synonyms": [
+                "Continuous Integration",
+                "Continuous Delivery",
+                "Continuous Deployment"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Jenkins",
+            "synonyms": [
+                "Jenkins Automation"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "AWS",
+            "synonyms": [
+                "Amazon Web Services"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Microsoft Azure",
+            "synonyms": [
+                "Azure"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Google Cloud",
+            "synonyms": [
+                "GCP",
+                "Google Cloud Platform"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Terraform",
+            "synonyms": [
+                "Infrastructure as Code",
+                "IaC"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Software Testing",
+            "synonyms": [
+                "Software Quality Assurance",
+                "QA Testing"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "Unit Testing",
+            "synonyms": [
+                "Unit Tests"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "Integration Testing",
+            "synonyms": [
+                "Integration Tests"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "pytest",
+            "synonyms": [
+                "Pytest"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "Selenium",
+            "synonyms": [
+                "Selenium WebDriver"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "Postman",
+            "synonyms": [
+                "Postman API Testing"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "Debugging",
+            "synonyms": [
+                "Code Debugging",
+                "Troubleshooting"
+            ],
+            "competency": "Software Engineering"
+        },
+        {
+            "name": "Agile",
+            "synonyms": [
+                "Agile Methodology",
+                "Agile Development"
+            ],
+            "competency": "Software Engineering"
+        },
+        {
+            "name": "Scrum",
+            "synonyms": [
+                "Scrum Framework"
+            ],
+            "competency": "Software Engineering"
+        },
+        {
+            "name": "SDLC",
+            "synonyms": [
+                "Software Development Life Cycle"
+            ],
+            "competency": "Software Engineering"
+        },
+        {
+            "name": "System Design",
+            "synonyms": [
+                "Software System Design"
+            ],
+            "competency": "Software Engineering"
+        },
+        {
+            "name": "Technical Documentation",
+            "synonyms": [
+                "Documentation",
+                "API Documentation"
+            ],
+            "competency": "Software Engineering"
+        },
+        {
+            "name": "Communication",
+            "synonyms": [
+                "Verbal Communication",
+                "Written Communication"
+            ],
+            "competency": "Communication and Collaboration"
+        },
+        {
+            "name": "Teamwork",
+            "synonyms": [
+                "Team Collaboration",
+                "Collaboration"
+            ],
+            "competency": "Communication and Collaboration"
+        },
+        {
+            "name": "Leadership",
+            "synonyms": [
+                "Team Leadership"
+            ],
+            "competency": "Communication and Collaboration"
+        },
+        {
+            "name": "Critical Thinking",
+            "synonyms": [
+                "Analytical Thinking"
+            ],
+            "competency": "Communication and Collaboration"
+        },
+        {
+            "name": "Time Management",
+            "synonyms": [
+                "Task Prioritization"
+            ],
+            "competency": "Communication and Collaboration"
+        },
+        {
+            "name": "Presentation Skills",
+            "synonyms": [
+                "Presentation",
+                "Public Speaking"
+            ],
+            "competency": "Communication and Collaboration"
+        },
+        {
+            "name": "Project Management",
+            "synonyms": [
+                "Project Planning",
+                "Project Coordination"
+            ],
+            "competency": "Communication and Collaboration"
+        },
+        {
+            "name": "DAX",
+            "synonyms": [
+                "Data Analysis Expressions"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Power Query",
+            "synonyms": [
+                "Power Query Editor",
+                "M Language"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Google Analytics",
+            "synonyms": [
+                "GA4",
+                "Google Analytics 4"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Apache Airflow",
+            "synonyms": [
+                "Airflow"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "dbt",
+            "synonyms": [
+                "Data Build Tool"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Snowflake",
+            "synonyms": [
+                "Snowflake Data Cloud"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Google BigQuery",
+            "synonyms": [
+                "BigQuery"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Amazon Redshift",
+            "synonyms": [
+                "Redshift"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Azure Data Factory",
+            "synonyms": [
+                "ADF"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Databricks",
+            "synonyms": [
+                "Databricks Platform"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Delta Lake",
+            "synonyms": [
+                "Delta Tables"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Apache Hadoop",
+            "synonyms": [
+                "Hadoop"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Apache Flink",
+            "synonyms": [
+                "Flink"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Apache NiFi",
+            "synonyms": [
+                "NiFi"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Data Modeling",
+            "synonyms": [
+                "Data Model Design"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "XGBoost",
+            "synonyms": [
+                "Extreme Gradient Boosting"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "LightGBM",
+            "synonyms": [
+                "Light Gradient Boosting Machine"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "CatBoost",
+            "synonyms": [
+                "Categorical Boosting"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Hugging Face",
+            "synonyms": [
+                "HuggingFace",
+                "Transformers Library"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "OpenAI API",
+            "synonyms": [
+                "OpenAI API Integration"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Embeddings",
+            "synonyms": [
+                "Vector Embeddings",
+                "Text Embeddings"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Fine-Tuning",
+            "synonyms": [
+                "Model Fine-Tuning",
+                "LLM Fine-Tuning"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Evaluation of LLMs",
+            "synonyms": [
+                "LLM Evaluation",
+                "LLM Evals"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "AI Agents",
+            "synonyms": [
+                "Agentic AI",
+                "AI Agent Development"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "ChromaDB",
+            "synonyms": [
+                "Chroma"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "FAISS",
+            "synonyms": [
+                "Facebook AI Similarity Search"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Ollama",
+            "synonyms": [
+                "Ollama Models"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "LlamaIndex",
+            "synonyms": [
+                "Llama Index"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Reinforcement Learning",
+            "synonyms": [
+                "RL"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Time Series Analysis",
+            "synonyms": [
+                "Time Series Forecasting"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Redux",
+            "synonyms": [
+                "Redux Toolkit"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Vite",
+            "synonyms": [
+                "Vite.js"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Webpack",
+            "synonyms": [
+                "Webpack Bundler"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Sass",
+            "synonyms": [
+                "SCSS",
+                "Syntactically Awesome Style Sheets"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Material UI",
+            "synonyms": [
+                "MUI"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "jQuery",
+            "synonyms": [
+                "JQuery"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Web Accessibility",
+            "synonyms": [
+                "Accessibility",
+                "WCAG"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "Progressive Web Apps",
+            "synonyms": [
+                "PWA",
+                "Progressive Web Application"
+            ],
+            "competency": "Frontend Development"
+        },
+        {
+            "name": "WebSockets",
+            "synonyms": [
+                "WebSocket Protocol"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "Celery",
+            "synonyms": [
+                "Celery Task Queue"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "RabbitMQ",
+            "synonyms": [
+                "Rabbit MQ"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "OAuth 2.0",
+            "synonyms": [
+                "OAuth2",
+                "OAuth"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "OpenID Connect",
+            "synonyms": [
+                "OIDC"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "JWT",
+            "synonyms": [
+                "JSON Web Token",
+                "JSON Web Tokens"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "gRPC",
+            "synonyms": [
+                "Google Remote Procedure Call"
+            ],
+            "competency": "Backend Development"
+        },
+        {
+            "name": "Serverless Computing",
+            "synonyms": [
+                "Serverless Architecture"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "GitHub Actions",
+            "synonyms": [
+                "GitHub Workflows"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Prometheus",
+            "synonyms": [
+                "Prometheus Monitoring"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Grafana",
+            "synonyms": [
+                "Grafana Dashboards"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Ansible",
+            "synonyms": [
+                "Ansible Automation"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Helm",
+            "synonyms": [
+                "Helm Charts"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Argo CD",
+            "synonyms": [
+                "ArgoCD"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Nginx",
+            "synonyms": [
+                "NGINX Web Server"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Apache HTTP Server",
+            "synonyms": [
+                "Apache Web Server",
+                "httpd"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "CloudFormation",
+            "synonyms": [
+                "AWS CloudFormation"
+            ],
+            "competency": "Cloud and DevOps"
+        },
+        {
+            "name": "Playwright",
+            "synonyms": [
+                "Playwright Testing"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "Cypress",
+            "synonyms": [
+                "Cypress Testing"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "Jest",
+            "synonyms": [
+                "Jest Testing Framework"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "JUnit",
+            "synonyms": [
+                "JUnit Testing"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "Robot Framework",
+            "synonyms": [
+                "Robot Framework Testing"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "Performance Testing",
+            "synonyms": [
+                "Load Testing",
+                "Stress Testing"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "Security Testing",
+            "synonyms": [
+                "Application Security Testing"
+            ],
+            "competency": "Testing and Quality"
+        },
+        {
+            "name": "OWASP",
+            "synonyms": [
+                "OWASP Top 10"
+            ],
+            "competency": "Cybersecurity"
+        },
+        {
+            "name": "Penetration Testing",
+            "synonyms": [
+                "Pen Testing",
+                "Ethical Hacking"
+            ],
+            "competency": "Cybersecurity"
+        },
+        {
+            "name": "Application Security",
+            "synonyms": [
+                "AppSec"
+            ],
+            "competency": "Cybersecurity"
+        },
+        {
+            "name": "Network Security",
+            "synonyms": [
+                "Network Protection"
+            ],
+            "competency": "Cybersecurity"
+        },
+        {
+            "name": "Cryptography",
+            "synonyms": [
+                "Encryption Techniques"
+            ],
+            "competency": "Cybersecurity"
+        },
+        {
+            "name": "Identity and Access Management",
+            "synonyms": [
+                "IAM"
+            ],
+            "competency": "Cybersecurity"
+        },
+        {
+            "name": "Vulnerability Assessment",
+            "synonyms": [
+                "Vulnerability Scanning"
+            ],
+            "competency": "Cybersecurity"
+        },
+        {
+            "name": "Incident Response",
+            "synonyms": [
+                "Security Incident Response"
+            ],
+            "competency": "Cybersecurity"
+        },
+        {
+            "name": "Requirements Analysis",
+            "synonyms": [
+                "Requirements Gathering",
+                "Business Requirements Analysis"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Stakeholder Management",
+            "synonyms": [
+                "Stakeholder Engagement"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Business Analysis",
+            "synonyms": [
+                "Business Process Analysis"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Product Management",
+            "synonyms": [
+                "Product Strategy"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "User Research",
+            "synonyms": [
+                "User Interviews",
+                "UX Research"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Wireframing",
+            "synonyms": [
+                "Wireframes"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Figma",
+            "synonyms": [
+                "Figma Design"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Process Improvement",
+            "synonyms": [
+                "Business Process Improvement"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Jira",
+            "synonyms": [
+                "Atlassian Jira"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Confluence",
+            "synonyms": [
+                "Atlassian Confluence"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Microsoft Office",
+            "synonyms": [
+                "MS Office",
+                "Microsoft Office Suite"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Word",
+            "synonyms": [
+                "Microsoft Word",
+                "MS Word"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "PowerPoint",
+            "synonyms": [
+                "Microsoft PowerPoint",
+                "MS PowerPoint"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Financial Analysis",
+            "synonyms": [
+                "Financial Modeling"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Forecasting",
+            "synonyms": [
+                "Business Forecasting"
+            ],
+            "competency": "Business and Product"
+        },
+        {
+            "name": "Data Storytelling",
+            "synonyms": [
+                "Storytelling with Data"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Data Governance",
+            "synonyms": [
+                "Data Management Governance"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Data Quality",
+            "synonyms": [
+                "Data Quality Assurance"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Master Data Management",
+            "synonyms": [
+                "MDM"
+            ],
+            "competency": "Data Engineering"
+        },
+        {
+            "name": "Apache Superset",
+            "synonyms": [
+                "Superset"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Metabase",
+            "synonyms": [
+                "Metabase Analytics"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Jupyter",
+            "synonyms": [
+                "Jupyter Notebook",
+                "JupyterLab"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Matplotlib",
+            "synonyms": [
+                "Pyplot"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Seaborn",
+            "synonyms": [
+                "Python Seaborn"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "Plotly",
+            "synonyms": [
+                "Plotly Express"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "SciPy",
+            "synonyms": [
+                "Scientific Python"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "SymPy",
+            "synonyms": [
+                "Symbolic Python"
+            ],
+            "competency": "Data Analytics"
+        },
+        {
+            "name": "OpenCV",
+            "synonyms": [
+                "Open Source Computer Vision Library"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "ONNX",
+            "synonyms": [
+                "Open Neural Network Exchange"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "MLflow",
+            "synonyms": [
+                "ML Flow"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Weights and Biases",
+            "synonyms": [
+                "W&B",
+                "Weights & Biases"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": "Model Deployment",
+            "synonyms": [
+                "ML Model Deployment"
+            ],
+            "competency": "AI and Machine Learning"
+        },
+        {
+            "name": ".NET",
+            "synonyms": [
+                ".NET Framework",
+                "DotNet",
+                "dotnet"
+            ],
+            "competency": "Backend Development"
+        }
+    ]
+}

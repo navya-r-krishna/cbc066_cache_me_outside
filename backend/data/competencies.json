@@ -1,0 +1,167 @@
+{
+    "competencies": [
+        {
+            "name": "Programming Fundamentals",
+            "skills": [
+                "Python",
+                "Java",
+                "C++",
+                "JavaScript",
+                "C#"
+            ],
+            "description": "Language syntax, control flow, functions and programming concepts"
+        },
+        {
+            "name": "Data Structures and Algorithms",
+            "skills": [
+                "Arrays",
+                "Linked Lists",
+                "Stacks",
+                "Queues",
+                "Trees",
+                "Graphs",
+                "Sorting",
+                "Dynamic Programming"
+            ],
+            "description": "Data organization, algorithm design and complexity analysis"
+        },
+        {
+            "name": "Databases",
+            "skills": [
+                "SQL",
+                "PostgreSQL",
+                "MySQL",
+                "MongoDB",
+                "Database Design",
+                "DBMS"
+            ],
+            "description": "Data modeling, querying, indexing and transaction concepts"
+        },
+        {
+            "name": "Backend Development",
+            "skills": [
+                "FastAPI",
+                "Flask",
+                "Django",
+                "Node.js",
+                "REST APIs",
+                "Authentication"
+            ],
+            "description": "Server-side application development and API design"
+        },
+        {
+            "name": "Frontend Development",
+            "skills": [
+                "HTML",
+                "CSS",
+                "React",
+                "JavaScript",
+                "TypeScript"
+            ],
+            "description": "Browser interfaces, components and client-side application development"
+        },
+        {
+            "name": "Data Analytics",
+            "skills": [
+                "Python",
+                "Pandas",
+                "NumPy",
+                "SQL",
+                "Data Visualization",
+                "Statistics",
+                "Excel",
+                "Power BI",
+                "Tableau"
+            ],
+            "description": "Data cleaning, analysis, reporting and interpretation"
+        },
+        {
+            "name": "AI and Machine Learning",
+            "skills": [
+                "Machine Learning",
+                "Deep Learning",
+                "Pandas",
+                "NumPy",
+                "Scikit-learn",
+                "TensorFlow",
+                "PyTorch",
+                "NLP"
+            ],
+            "description": "Model development, evaluation and data-driven prediction"
+        },
+        {
+            "name": "Core Computer Science",
+            "skills": [
+                "Operating Systems",
+                "Computer Networks",
+                "Object-Oriented Programming",
+                "DBMS",
+                "Computer Architecture"
+            ],
+            "description": "Foundational computer science principles"
+        },
+        {
+            "name": "Software Engineering",
+            "skills": [
+                "Git",
+                "GitHub",
+                "Testing",
+                "Debugging",
+                "CI/CD",
+                "Docker",
+                "Agile"
+            ],
+            "description": "Version control, quality assurance and software delivery"
+        },
+        {
+            "name": "Communication and Collaboration",
+            "skills": [
+                "Communication",
+                "Teamwork",
+                "Problem-solving",
+                "Leadership",
+                "Adaptability"
+            ],
+            "description": "Communication, collaboration and workplace effectiveness"
+        }
+    ],
+    "merge_groups": [
+        {
+            "name": "Python Data Analysis",
+            "skills": [
+                "Python",
+                "Pandas",
+                "NumPy"
+            ],
+            "merge_when_co_required": true
+        },
+        {
+            "name": "JavaScript Full Stack",
+            "skills": [
+                "JavaScript",
+                "React",
+                "Node.js"
+            ],
+            "merge_when_co_required": true
+        },
+        {
+            "name": "SQL Database Ecosystem",
+            "skills": [
+                "SQL",
+                "PostgreSQL",
+                "MySQL"
+            ],
+            "merge_when_co_required": true
+        }
+    ],
+    "difficulty_rubric": {
+        "easy": "Test definitions, basic syntax and foundational concepts",
+        "medium": "Test practical application, debugging and trade-offs",
+        "hard": "Test complex problem-solving, system design and advanced trade-offs"
+    },
+    "version": "1.0",
+    "sources": [
+        "Initial team-authored competency mapping for hackathon demonstration",
+        "Expand and credit ESCO or O*NET after verifying the downloaded source data"
+    ]
+}
