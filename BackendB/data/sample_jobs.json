@@ -1,0 +1,81 @@
+[
+  {
+    "id": "job_01",
+    "title": "Python Backend Developer",
+    "description_summary": "Design and maintain high-performance microservices using FastAPI, optimize SQL queries, and manage caching layers.",
+    "low_info": false,
+    "competencies": [
+      {
+        "name": "Backend Engineering",
+        "weight": 50,
+        "skills": [
+          {"name": "Python", "weight": 30, "requirement_level": "required"},
+          {"name": "FastAPI", "weight": 20, "requirement_level": "required"}
+        ]
+      },
+      {
+        "name": "Data Management",
+        "weight": 30,
+        "skills": [
+          {"name": "SQL", "weight": 20, "requirement_level": "required"},
+          {"name": "Redis", "weight": 10, "requirement_level": "preferred"}
+        ]
+      },
+      {
+        "name": "Reliability & Testing",
+        "weight": 20,
+        "skills": [
+          {"name": "Unit Testing", "weight": 20, "requirement_level": "required"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "job_02",
+    "title": "Frontend React Engineer",
+    "description_summary": "Build responsive, accessible user interfaces with React, manage state with Redux Toolkit, and ensure web performance.",
+    "low_info": false,
+    "competencies": [
+      {
+        "name": "Frontend Core",
+        "weight": 60,
+        "skills": [
+          {"name": "React", "weight": 35, "requirement_level": "required"},
+          {"name": "TypeScript", "weight": 25, "requirement_level": "required"}
+        ]
+      },
+      {
+        "name": "State & Performance",
+        "weight": 40,
+        "skills": [
+          {"name": "State Management", "weight": 20, "requirement_level": "required"},
+          {"name": "Web Performance", "weight": 20, "requirement_level": "preferred"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "job_03",
+    "title": "Data Analyst",
+    "description_summary": "Query analytical warehouses, build KPI dashboards for non-technical stakeholders, and analyze retention trends.",
+    "low_info": false,
+    "competencies": [
+      {
+        "name": "SQL & Warehousing",
+        "weight": 50,
+        "skills": [
+          {"name": "SQL", "weight": 35, "requirement_level": "required"},
+          {"name": "Data Modeling", "weight": 15, "requirement_level": "required"}
+        ]
+      },
+      {
+        "name": "Visualization & Insight",
+        "weight": 50,
+        "skills": [
+          {"name": "Data Visualization", "weight": 25, "requirement_level": "required"},
+          {"name": "Stakeholder Communication", "weight": 25, "requirement_level": "required"}
+        ]
+      }
+    ]
+  }
+]

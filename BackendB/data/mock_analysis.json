@@ -1,0 +1,134 @@
+{
+  "job": {
+    "id": "job_001",
+    "title": "Python Backend Developer",
+    "raw_text": "We are seeking a Python Backend Developer to build scalable REST APIs, integrate relational and NoSQL databases, and implement secure cloud microservices.",
+    "description_summary": "Develop scalable backend REST APIs, integrate relational and NoSQL databases, and implement secure cloud microservices.",
+    "experience_level": "mid",
+    "low_info": false,
+    "unknown_terms": [],
+    "skills": [
+      {"name": "Python", "weight": 30, "requirement_level": "required"},
+      {"name": "FastAPI", "weight": 20, "requirement_level": "required"},
+      {"name": "PostgreSQL", "weight": 20, "requirement_level": "required"},
+      {"name": "Redis", "weight": 10, "requirement_level": "preferred"},
+      {"name": "System Design", "weight": 20, "requirement_level": "required"}
+    ],
+    "competencies": [
+      {
+        "name": "Backend Development",
+        "weight": 50,
+        "skills": [
+          {
+            "name": "Python",
+            "weight": 30,
+            "requirement_level": "required",
+            "candidate_evidence": "strong"
+          },
+          {
+            "name": "FastAPI",
+            "weight": 20,
+            "requirement_level": "required",
+            "candidate_evidence": "limited"
+          }
+        ]
+      },
+      {
+        "name": "Databases & Storage",
+        "weight": 30,
+        "skills": [
+          {
+            "name": "PostgreSQL",
+            "weight": 20,
+            "requirement_level": "required",
+            "candidate_evidence": "strong"
+          },
+          {
+            "name": "Redis",
+            "weight": 10,
+            "requirement_level": "preferred",
+            "candidate_evidence": "none"
+          }
+        ]
+      },
+      {
+        "name": "System Architecture",
+        "weight": 20,
+        "skills": [
+          {
+            "name": "System Design",
+            "weight": 20,
+            "requirement_level": "required",
+            "candidate_evidence": "limited"
+          }
+        ]
+      }
+    ],
+    "created_at": "2026-10-10T12:00:00Z"
+  },
+  "candidate": {
+    "id": "cand_001",
+    "name": "Alex Mercer",
+    "resume_md": "# Alex Mercer\nBackend Engineer with 3 years experience building Python APIs and relational database architectures.",
+    "experience_years": 3,
+    "education": ["B.S. in Computer Science, State University"],
+    "skills": ["Python", "SQL", "REST APIs", "FastAPI", "Docker", "Git"],
+    "is_fresher": false,
+    "score": 82,
+    "band": "intermediate",
+    "strengths": ["Python", "SQL", "REST APIs"],
+    "gaps": ["Distributed Systems", "Kafka"],
+    "history": [],
+    "created_at": "2026-10-10T12:30:00Z"
+  },
+  "competencies": [
+    {
+      "name": "Backend Development",
+      "weight": 50,
+      "skills": [
+        {
+          "name": "Python",
+          "weight": 30,
+          "requirement_level": "required",
+          "candidate_evidence": "strong"
+        },
+        {
+          "name": "FastAPI",
+          "weight": 20,
+          "requirement_level": "required",
+          "candidate_evidence": "limited"
+        }
+      ]
+    },
+    {
+      "name": "Databases & Storage",
+      "weight": 30,
+      "skills": [
+        {
+          "name": "PostgreSQL",
+          "weight": 20,
+          "requirement_level": "required",
+          "candidate_evidence": "strong"
+        },
+        {
+          "name": "Redis",
+          "weight": 10,
+          "requirement_level": "preferred",
+          "candidate_evidence": "none"
+        }
+      ]
+    },
+    {
+      "name": "System Architecture",
+      "weight": 20,
+      "skills": [
+        {
+          "name": "System Design",
+          "weight": 20,
+          "requirement_level": "required",
+          "candidate_evidence": "limited"
+        }
+      ]
+    }
+  ]
+}

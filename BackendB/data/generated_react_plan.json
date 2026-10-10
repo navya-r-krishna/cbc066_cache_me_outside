@@ -1,0 +1,145 @@
+{
+  "status": "partial",
+  "job_id": "job_001",
+  "candidate_id": "cand_001",
+  "job_title": "Python Backend Developer",
+  "candidate_name": "Alex Mercer",
+  "total_questions": 5,
+  "total_requested": 5,
+  "settings": {
+    "interview_minutes": 25,
+    "difficulty": "auto",
+    "difficulty_mix": {}
+  },
+  "note": "The AI service is unavailable right now, so a saved demo plan is shown instead of new questions.",
+  "notes": [
+    "The AI service is unavailable right now, so a saved demo plan is shown instead of new questions.",
+    "The AI service has reached its usage limit. Please try again later."
+  ],
+  "coverage": [
+    {
+      "competency": "Backend Development",
+      "skill": "Python",
+      "easy": 0,
+      "medium": 1,
+      "hard": 1,
+      "total": 2
+    },
+    {
+      "competency": "Backend Development",
+      "skill": "FastAPI",
+      "easy": 1,
+      "medium": 0,
+      "hard": 0,
+      "total": 1
+    },
+    {
+      "competency": "Databases & Storage",
+      "skill": "PostgreSQL",
+      "easy": 0,
+      "medium": 1,
+      "hard": 0,
+      "total": 1
+    },
+    {
+      "competency": "System Architecture",
+      "skill": "System Design",
+      "easy": 0,
+      "medium": 1,
+      "hard": 0,
+      "total": 1
+    }
+  ],
+  "budget_table": "Interview Duration: 25 mins | Question Budget: 5 questions\n- [Backend Development] Python: 0 easy, 1 med, 1 hard (total 2)\n- [Backend Development] FastAPI: 1 easy, 0 med, 0 hard (total 1)\n- [Databases & Storage] PostgreSQL: 0 easy, 1 med, 0 hard (total 1)\n- [System Architecture] System Design: 0 easy, 1 med, 0 hard (total 1)",
+  "questions": [
+    {
+      "id": "q_c658f1d0ff",
+      "competency": "Backend Development",
+      "skill": "Python",
+      "difficulty": "hard",
+      "text": "How would you diagnose and resolve memory leaks caused by cyclic references and native C extensions in high-concurrency Python services?",
+      "question": "How would you diagnose and resolve memory leaks caused by cyclic references and native C extensions in high-concurrency Python services?",
+      "key_points": [
+        "Use tracemalloc and objgraph to inspect object allocation spikes",
+        "Analyze gc.garbage and cyclic reference collector thresholds",
+        "Inspect PyObject reference counting in C extension bindings",
+        "Profile heap allocations with valgrind or memray"
+      ],
+      "rationale": "Tests Python under Backend Development: required skill (30% role weighting), with strong candidate evidence. Calibrated at hard difficulty.",
+      "assumed": false,
+      "status": "pending"
+    },
+    {
+      "id": "q_07b4f4c32e",
+      "competency": "Backend Development",
+      "skill": "Python",
+      "difficulty": "medium",
+      "text": "How would you process and clean a 15GB CSV file in Python on a worker machine with only 4GB of RAM?",
+      "question": "How would you process and clean a 15GB CSV file in Python on a worker machine with only 4GB of RAM?",
+      "key_points": [
+        "Stream line-by-line using generators or chunksize in pandas/polars",
+        "Select only required columns and downcast numeric datatypes",
+        "Aggregate and write intermediate batches to disk",
+        "Avoid loading entire file into memory"
+      ],
+      "rationale": "Tests Python under Backend Development: required skill (30% role weighting), with strong candidate evidence. Calibrated at medium difficulty.",
+      "assumed": false,
+      "status": "pending"
+    },
+    {
+      "id": "q_c9048ea9a1",
+      "competency": "Backend Development",
+      "skill": "FastAPI",
+      "difficulty": "easy",
+      "text": "How do Pydantic models in FastAPI automatically handle incoming request payload validation and OpenAPI documentation generation?",
+      "question": "How do Pydantic models in FastAPI automatically handle incoming request payload validation and OpenAPI documentation generation?",
+      "key_points": [
+        "Type hints define field types and default values",
+        "Automatic 422 Unprocessable Entity responses on validation failure",
+        "FastAPI extracts schema JSON directly from Pydantic models for Swagger/OpenAPI"
+      ],
+      "rationale": "Tests FastAPI under Backend Development: required skill (20% role weighting), with limited candidate evidence. Calibrated at easy difficulty.",
+      "assumed": false,
+      "status": "pending"
+    },
+    {
+      "id": "q_458dcfd04d",
+      "competency": "Databases & Storage",
+      "skill": "PostgreSQL",
+      "difficulty": "medium",
+      "text": "Orders and customers are stored in separate relational tables. How would you construct an efficient query to find all active customers who have not placed an order in the last 90 days?",
+      "question": "Orders and customers are stored in separate relational tables. How would you construct an efficient query to find all active customers who have not placed an order in the last 90 days?",
+      "key_points": [
+        "Use LEFT JOIN with NULL check or NOT EXISTS subquery",
+        "Filter dates accurately on the order timestamp column",
+        "Ensure join keys and date columns are indexed for performance",
+        "Handle potential duplicate customer records properly"
+      ],
+      "rationale": "Tests PostgreSQL under Databases & Storage: required skill (20% role weighting), with strong candidate evidence. Calibrated at medium difficulty.",
+      "assumed": false,
+      "status": "pending"
+    },
+    {
+      "id": "q_49371985b0",
+      "competency": "System Architecture",
+      "skill": "System Design",
+      "difficulty": "medium",
+      "text": "How would you design a distributed URL shortening service (like Bitly) ensuring high availability and low read latency?",
+      "question": "How would you design a distributed URL shortening service (like Bitly) ensuring high availability and low read latency?",
+      "key_points": [
+        "Base62 encoding of an auto-incrementing 64-bit ID",
+        "Distributed caching layer (Redis) for frequently accessed URLs",
+        "Replicated relational or NoSQL database for long-term mapping storage",
+        "Read-heavy architecture with CDN caching"
+      ],
+      "rationale": "Tests System Design under System Architecture: required skill (20% role weighting), with limited candidate evidence. Calibrated at medium difficulty.",
+      "assumed": false,
+      "status": "pending"
+    }
+  ],
+  "warnings": [
+    "Saved demo plan shown; its skills may not match this job's budget."
+  ],
+  "source": "demo_cache",
+  "is_fallback": true
+}

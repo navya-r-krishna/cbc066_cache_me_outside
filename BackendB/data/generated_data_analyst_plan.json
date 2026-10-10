@@ -1,0 +1,142 @@
+{
+  "status": "ready",
+  "job_id": "job_03",
+  "candidate_id": "cand_analyst_01",
+  "job_title": "Data Analyst",
+  "candidate_name": "Morgan Davis",
+  "total_questions": 5,
+  "total_requested": 5,
+  "settings": {
+    "interview_minutes": 25,
+    "difficulty": "auto",
+    "difficulty_mix": {
+      "easy": 20,
+      "medium": 50,
+      "hard": 30
+    }
+  },
+  "note": "",
+  "notes": [],
+  "coverage": [
+    {
+      "competency": "SQL & Warehousing",
+      "skill": "SQL",
+      "easy": 0,
+      "medium": 1,
+      "hard": 1,
+      "total": 2
+    },
+    {
+      "competency": "SQL & Warehousing",
+      "skill": "Data Modeling",
+      "easy": 1,
+      "medium": 0,
+      "hard": 0,
+      "total": 1
+    },
+    {
+      "competency": "Visualization & Insight",
+      "skill": "Data Visualization",
+      "easy": 0,
+      "medium": 1,
+      "hard": 0,
+      "total": 1
+    },
+    {
+      "competency": "Visualization & Insight",
+      "skill": "Stakeholder Communication",
+      "easy": 0,
+      "medium": 1,
+      "hard": 0,
+      "total": 1
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_da_001",
+      "competency": "SQL & Warehousing",
+      "skill": "SQL",
+      "difficulty": "hard",
+      "text": "An overnight reporting query aggregating monthly active users across three years has slowed drastically due to data skew on customer account IDs. How would you diagnose the skew and optimize the query execution in a cloud data warehouse?",
+      "question": "An overnight reporting query aggregating monthly active users across three years has slowed drastically due to data skew on customer account IDs. How would you diagnose the skew and optimize the query execution in a cloud data warehouse?",
+      "key_points": [
+        "Inspect query profile or execution plan to identify skewed stages and imbalanced spill-to-disk",
+        "Repartition or salt high-cardinality join keys to distribute data across worker nodes evenly",
+        "Pre-aggregate intermediate account metrics using daily summary rollups or materialized views",
+        "Evaluate columnar warehouse sorting and clustering keys on timestamp and account columns"
+      ],
+      "rationale": "Tests SQL under SQL & Warehousing: required skill (35% role weighting), to assess unverified candidate experience. Calibrated at hard difficulty.",
+      "assumed": false,
+      "status": "pending"
+    },
+    {
+      "id": "q_da_002",
+      "competency": "SQL & Warehousing",
+      "skill": "SQL",
+      "difficulty": "medium",
+      "text": "You need to compute rolling 7-day active user retention from a raw event log table where users trigger multiple events per day. How would you structure a SQL query using window functions to calculate this metric accurately?",
+      "question": "You need to compute rolling 7-day active user retention from a raw event log table where users trigger multiple events per day. How would you structure a SQL query using window functions to calculate this metric accurately?",
+      "key_points": [
+        "Deduplicate events by user and calendar day using a CTE or subquery",
+        "Apply window functions with framing (ROWS BETWEEN 6 PRECEDING AND CURRENT ROW)",
+        "Join daily activity back to user cohort acquisition dates",
+        "Ensure event timestamp columns are indexed or partitioned by date for scanning efficiency"
+      ],
+      "rationale": "Tests SQL under SQL & Warehousing: required skill (35% role weighting), to assess unverified candidate experience. Calibrated at medium difficulty.",
+      "assumed": false,
+      "status": "pending"
+    },
+    {
+      "id": "q_da_003",
+      "competency": "SQL & Warehousing",
+      "skill": "Data Modeling",
+      "difficulty": "easy",
+      "text": "What is the primary difference between a star schema and a snowflake schema in an analytical data warehouse?",
+      "question": "What is the primary difference between a star schema and a snowflake schema in an analytical data warehouse?",
+      "key_points": [
+        "Star schema uses denormalized dimension tables directly connected to the central fact table",
+        "Snowflake schema normalizes dimension tables into secondary lookup hierarchies",
+        "Star schemas offer faster query performance with fewer joins; snowflake schemas reduce redundancy"
+      ],
+      "rationale": "Tests Data Modeling under SQL & Warehousing: required skill (15% role weighting), to probe candidate gap. Calibrated at easy difficulty.",
+      "assumed": false,
+      "status": "pending"
+    },
+    {
+      "id": "q_da_004",
+      "competency": "Visualization & Insight",
+      "skill": "Data Visualization",
+      "difficulty": "medium",
+      "text": "An executive dashboard showing daily revenue trends fluctuates wildly due to weekend seasonality and payment gateway batching. What visualization technique would you use to reveal true underlying trends without misleading stakeholders?",
+      "question": "An executive dashboard showing daily revenue trends fluctuates wildly due to weekend seasonality and payment gateway batching. What visualization technique would you use to reveal true underlying trends without misleading stakeholders?",
+      "key_points": [
+        "Overlay a 7-day or 30-day moving average trendline over raw daily bar or line metrics",
+        "Include week-over-week or trailing-twelve-months comparison benchmarks",
+        "Clearly annotate data ingestion lags or batch processing windows",
+        "Provide interactive tooltips breaking down revenue by payment processor or region"
+      ],
+      "rationale": "Tests Data Visualization under Visualization & Insight: required skill (25% role weighting), to assess unverified candidate experience. Calibrated at medium difficulty.",
+      "assumed": false,
+      "status": "pending"
+    },
+    {
+      "id": "q_da_005",
+      "competency": "Visualization & Insight",
+      "skill": "Stakeholder Communication",
+      "difficulty": "medium",
+      "text": "A product manager insists that a recent feature drop increased user engagement, but your regression analysis indicates the metric lift is statistically insignificant. How would you communicate these findings to convince the product team to reconsider?",
+      "question": "A product manager insists that a recent feature drop increased user engagement, but your regression analysis indicates the metric lift is statistically insignificant. How would you communicate these findings to convince the product team to reconsider?",
+      "key_points": [
+        "Present the data visually with confidence intervals rather than abstract statistical jargon",
+        "Frame the insight around business impact, opportunity costs, and risk of false attribution",
+        "Propose a controlled A/B test or extended observation period to gather conclusive evidence",
+        "Acknowledge product goals while guiding the team toward decisions supported by data"
+      ],
+      "rationale": "Tests Stakeholder Communication under Visualization & Insight: required skill (25% role weighting), to assess unverified candidate experience. Calibrated at medium difficulty.",
+      "assumed": false,
+      "status": "pending"
+    }
+  ],
+  "warnings": [],
+  "source": "generated"
+}
