@@ -1,0 +1,337 @@
+/* ==========================================================================
+   InterviewIQ Editorial Design System Tokens
+   Palette: Forest Green, Warm Ivory, White, Muted Sage, Terracotta, Charcoal
+   ========================================================================== */
+:root {
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Primary Brand Colors */
+  --color-primary: #182D27;          /* Forest green: primary buttons, active tabs, dark headings */
+  --color-primary-hover: #223F37;    /* Forest green hover */
+  --color-primary-subtle: #2B4E44;   /* Forest green secondary */
+  --color-primary-light: #EBF0EA;    /* Very light forest tint */
+
+  /* Surface & Canvas Colors */
+  --color-bg-canvas: #F6F4EE;        /* Warm ivory: main page canvas background */
+  --color-surface: #FFFFFF;          /* White: forms, question surfaces, content cards */
+  --color-surface-subtle: #FAF9F5;   /* Subtle ivory card surface */
+  --color-surface-hover: #F2EFE8;    /* Hover fill */
+
+  /* Editorial Accents */
+  --color-accent-sage: #D8E4D5;      /* Muted sage: highlights, success states, badges */
+  --color-accent-sage-dark: #2F4D38; /* Sage text on light backgrounds */
+  --color-accent-sage-light: #EEF4EC;/* Very light sage fill */
+
+  --color-accent-terra: #C76B4A;     /* Terracotta: restrained secondary accents, gaps, warnings */
+  --color-accent-terra-hover: #B25A3A;
+  --color-accent-terra-light: #FBF0EB;/* Terracotta light fill */
+  --color-accent-terra-dark: #8F3E22; /* Terracotta deep text */
+
+  /* Neutral Text & Borders */
+  --color-text-main: #202823;        /* Charcoal: high readability content */
+  --color-text-secondary: #737870;   /* Secondary: descriptions, metadata, helper text */
+  --color-text-muted: #959A92;       /* Muted: placeholders, disabled states */
+  --color-border: #E2E1D9;           /* Warm border: subtle separation between sections */
+  --color-border-subtle: #ECEAE3;    /* Divider borders */
+  --color-border-focus: #182D27;     /* Focus outline */
+
+  /* Dark Forest Sidebar */
+  --sidebar-bg: #13221E;             /* Deep forest slate for sidebar */
+  --sidebar-surface: #1B2F2A;        /* Sidebar card surface */
+  --sidebar-border: rgba(226, 225, 217, 0.12);
+  --sidebar-text: #B4BDB7;
+  --sidebar-text-bright: #FFFFFF;
+  --sidebar-active-bg: rgba(216, 228, 213, 0.16);
+  --sidebar-active-border: #D8E4D5;
+
+  /* Semantic State Colors */
+  --color-success: #2F593E;
+  --color-success-bg: #EEF5F0;
+  --color-success-border: #C8DFC0;
+  --color-success-text: #1E3D29;
+
+  --color-warning: #94571A;
+  --color-warning-bg: #FEF7EE;
+  --color-warning-border: #F6DFBF;
+  --color-warning-text: #74400E;
+
+  --color-danger: #C76B4A;
+  --color-danger-bg: #FBF0EB;
+  --color-danger-border: #F4D3C7;
+  --color-danger-text: #8F3E22;
+
+  --color-info: #182D27;
+  --color-info-bg: #EBF0EA;
+  --color-info-border: #D8E4D5;
+  --color-info-text: #182D27;
+
+  /* Restrained Editorial Shadows */
+  --shadow-xs: 0 1px 2px rgba(32, 40, 35, 0.04);
+  --shadow-sm: 0 1px 3px rgba(32, 40, 35, 0.05), 0 1px 2px rgba(32, 40, 35, 0.03);
+  --shadow-md: 0 4px 8px -2px rgba(32, 40, 35, 0.06), 0 2px 4px -1px rgba(32, 40, 35, 0.03);
+
+  /* Radius: Structured and slightly rounded */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 140ms ease;
+  --transition-normal: 200ms ease;
+}
+
+/* ==========================================================================
+   CSS Resets & Typography
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-canvas);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Focus Visible Accessibility */
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8D6CC;
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #BDBAA9;
+}
+
+/* Backwards compatibility tokens mapped to Editorial Palette */
+:root {
+  --lavender-50: #EEF4EC;   /* Light Sage tint */
+  --lavender-100: #D8E4D5;  /* Muted Sage */
+  --lavender-200: #C4D3C0;  /* Sage border */
+  --lavender-900: #182D27;  /* Forest Green */
+  --primary: #182D27;
+  --primary-hover: #223F37;
+  --bg-subtle: #FAF9F5;
+  --border-light: #E2E1D9;
+}
+
+/* ==========================================================================
+   Shared Editorial Button & Component Utilities
+   ========================================================================== */
+.btn-primary {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 13.5px;
+  padding: 9px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-fast);
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+  font-weight: 500;
+  font-size: 13.5px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-fast);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  border-color: #D2D0C6;
+}
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+.btn-ghost:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-main);
+}
+
+.btn-terra {
+  background: var(--color-accent-terra);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 13.5px;
+  padding: 9px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-accent-terra);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-fast);
+}
+.btn-terra:hover:not(:disabled) {
+  background: var(--color-accent-terra-hover);
+  border-color: var(--color-accent-terra-hover);
+}
+
+/* Editorial Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.badge-sage {
+  background: var(--color-accent-sage);
+  color: var(--color-accent-sage-dark);
+  border: 1px solid #C4D3C0;
+}
+
+.badge-forest,
+.badge-purple {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border: 1px solid var(--color-accent-sage);
+}
+
+.badge-terra {
+  background: var(--color-accent-terra-light);
+  color: var(--color-accent-terra-dark);
+  border: 1px solid var(--color-accent-terra-border, #F4D3C7);
+}
+
+.badge-neutral {
+  background: #ECEAE3;
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+}
+
+.badge-success {
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+  border: 1px solid var(--color-success-border);
+}
+
+.badge-warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  border: 1px solid var(--color-warning-border);
+}
+
+.badge-danger {
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
+  border: 1px solid var(--color-danger-border);
+}
+
+/* Card Surface */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast);
+}
+
+/* Shimmer Loading */
+@keyframes editorialPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.shimmer-box {
+  background: #ECEAE2;
+  animation: editorialPulse 1.8s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
