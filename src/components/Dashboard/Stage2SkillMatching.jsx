@@ -332,33 +332,45 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
   };
 
   return (
-    <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <div
+      className="animate-fade-in"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 10,
+        height: '100%',
+        maxHeight: '100%',
+        overflow: 'hidden',
+        justifyContent: 'space-between',
+      }}
+    >
       {/* Stage Header - Heading Only with Corner Start New Formulation */}
       <div
         className="card"
         style={{
-          padding: '20px 24px',
+          padding: '10px 16px',
           background: '#FFFFFF',
           border: '1px solid var(--color-border)',
           borderRadius: 'var(--radius-md)',
+          flexShrink: 0,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 14 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
           <div>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
+            <h2 style={{ fontSize: 16.5, fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
               Stage 2: Skill Matching & Calibration
             </h2>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <span className="badge badge-forest" style={{ fontSize: 12, padding: '5px 10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            <span className="badge badge-forest" style={{ fontSize: 11, padding: '4px 8px' }}>
               {skills.length} Extracted Skills
             </span>
             <span
               className="badge badge-sage"
               style={{
-                fontSize: 12,
-                padding: '5px 10px',
+                fontSize: 11,
+                padding: '4px 8px',
                 color: 'var(--color-primary)',
                 fontWeight: 700,
               }}
@@ -373,9 +385,9 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: 6,
-                  fontSize: 12,
-                  padding: '6px 12px',
+                  gap: 5,
+                  fontSize: 11.5,
+                  padding: '5px 10px',
                   borderRadius: 'var(--radius-sm)',
                   color: 'var(--color-primary)',
                   background: '#FFFFFF',
@@ -383,7 +395,7 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
                 }}
                 title="Reset and start fresh"
               >
-                <RotateCcw size={13} /> Start New Formulation
+                <RotateCcw size={12} /> Start New Formulation
               </button>
             )}
           </div>
@@ -394,8 +406,11 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-          gap: 20,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: 12,
+          flex: 1,
+          minHeight: 0,
+          overflow: 'hidden',
         }}
       >
         {/* =================================================================== */}
@@ -404,13 +419,16 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
         <div
           className="card"
           style={{
-            padding: '20px 22px',
+            padding: '12px 16px',
             background: '#FFFFFF',
             border: '1px solid var(--color-border)',
             borderRadius: 'var(--radius-md)',
             display: 'flex',
             flexDirection: 'column',
-            gap: 16,
+            gap: 10,
+            height: '100%',
+            minHeight: 0,
+            overflow: 'hidden',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -426,7 +444,7 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
           </div>
 
           {/* List of Job Skills with Drag and Drop */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1, minHeight: 0, overflowY: 'auto', paddingRight: '4px' }}>
             {skills.map((skill, index) => {
               const isDragging = draggedIndex === index;
               const isOver = dragOverIndex === index;
@@ -559,13 +577,16 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
         <div
           className="card"
           style={{
-            padding: '20px 22px',
+            padding: '12px 16px',
             background: '#FFFFFF',
             border: '1px solid var(--color-border)',
             borderRadius: 'var(--radius-md)',
             display: 'flex',
             flexDirection: 'column',
-            gap: 16,
+            gap: 10,
+            height: '100%',
+            minHeight: 0,
+            overflow: 'hidden',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -580,7 +601,7 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
           {/* Dynamic Candidate Profile Match Header */}
           <div
             style={{
-              padding: '10px 14px',
+              padding: '8px 12px',
               borderRadius: 'var(--radius-sm)',
               background: 'var(--color-primary-light)',
               border: '1px solid var(--color-accent-sage)',
@@ -588,23 +609,24 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
               alignItems: 'center',
               justifyContent: 'space-between',
               transition: 'all 200ms ease',
+              flexShrink: 0,
             }}
           >
             <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-primary)' }}>
+              <div style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--color-primary)' }}>
                 {candidateSummary.candidateName}
               </div>
-              <div style={{ fontSize: 11.5, color: 'var(--color-text-secondary)' }}>
+              <div style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>
                 Seniority: {candidateSummary.band}
               </div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--color-text-secondary)' }}>
+              <div style={{ fontSize: 10.5, fontWeight: 600, color: 'var(--color-text-secondary)' }}>
                 Match Score
               </div>
               <div
                 style={{
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: 800,
                   color: 'var(--color-primary)',
                   transition: 'all 200ms ease',
@@ -616,36 +638,36 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
           </div>
 
           {/* Dynamically Calibrated Candidate Skills List */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: 1, minHeight: 0, overflowY: 'auto', paddingRight: '4px' }}>
             {dynamicCandidateData.candidateSkillsList.map((csk) => (
               <div
                 key={csk.id}
                 style={{
-                  padding: '12px 14px',
+                  padding: '10px 12px',
                   borderRadius: 'var(--radius-sm)',
                   background: '#FFFFFF',
                   border: '1px solid var(--color-border)',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: 6,
+                  gap: 5,
                   transition: 'all 160ms ease',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
-                  <div style={{ fontWeight: 600, fontSize: 13, color: 'var(--color-primary)' }}>
+                  <div style={{ fontWeight: 600, fontSize: 12.5, color: 'var(--color-primary)' }}>
                     {csk.name}
                   </div>
 
                   <span
                     className={`badge ${csk.matchLevel === 'Verified Match' ? 'badge-success' : 'badge-sage'}`}
-                    style={{ fontSize: 10.5, padding: '2px 8px' }}
+                    style={{ fontSize: 10, padding: '2px 7px' }}
                   >
                     {csk.matchLevel}
                   </span>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, color: 'var(--color-text-secondary)' }}>
-                  <span className="badge badge-sage" style={{ fontSize: 10, padding: '2px 6px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 10.5, color: 'var(--color-text-secondary)' }}>
+                  <span className="badge badge-sage" style={{ fontSize: 9.5, padding: '2px 5px' }}>
                     {csk.category}
                   </span>
                   <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -662,7 +684,7 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
       <div
         className="card"
         style={{
-          padding: '16px 24px',
+          padding: '10px 18px',
           background: '#FFFFFF',
           border: '1px solid var(--color-border)',
           borderRadius: 'var(--radius-md)',
@@ -670,16 +692,17 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: 14,
+          gap: 12,
+          flexShrink: 0,
         }}
       >
         <button
           type="button"
           className="btn-secondary"
           onClick={onBack}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5, padding: '6px 14px' }}
         >
-          <ArrowLeft size={15} /> Back to Role & Resume
+          <ArrowLeft size={14} /> Back to Role & Resume
         </button>
 
         <button
@@ -690,25 +713,25 @@ export function Stage2SkillMatching({ onBack, onProceedToQuestions, onRestart })
           style={{
             background: 'var(--color-primary)',
             color: '#FFFFFF',
-            padding: '12px 28px',
-            fontSize: 14,
+            padding: '8px 24px',
+            fontSize: 13.5,
             fontWeight: 700,
             borderRadius: 'var(--radius-sm)',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 8,
+            gap: 7,
             boxShadow: 'var(--shadow-sm)',
           }}
         >
           {isGenerating ? (
             <>
-              <Loader2 size={16} className="spin" />
+              <Loader2 size={15} className="spin" />
               {loadingMsg || 'Generating Questions...'}
             </>
           ) : (
             <>
               Generate Questions
-              <ChevronRight size={16} />
+              <ChevronRight size={15} />
             </>
           )}
         </button>

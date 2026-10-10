@@ -3,8 +3,8 @@ import { Check, Circle } from 'lucide-react';
 
 export function StageStepper({ currentStage, maxReachedStage = 1, onSelectStage }) {
   const stages = [
-    { number: 1, title: 'Role & Resume', desc: 'Job text & resume file' },
-    { number: 2, title: 'Skill Matching', desc: 'Job & candidate priorities' },
+    { number: 1, title: 'Job Description & Resume Upload', desc: 'Job text & resume file' },
+    { number: 2, title: 'Skill Matching', desc: 'Job and candidate skills priority' },
     { number: 3, title: 'Question Generation', desc: 'Synthesized interview plan' },
     { number: 4, title: 'Candidate Score', desc: 'Scorecard & final review kit' },
   ];

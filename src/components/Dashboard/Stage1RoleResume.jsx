@@ -173,10 +173,15 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
     <div
       className="card animate-fade-in"
       style={{
-        padding: '24px 28px',
+        padding: '14px 18px',
         background: '#FFFFFF',
         border: '1px solid var(--color-border)',
         borderRadius: 'var(--radius-md)',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        overflow: 'hidden',
       }}
     >
       {/* Form Header: Title on Left & Compact Difficulty Selector on Top-Right */}
@@ -186,31 +191,31 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: 14,
-          paddingBottom: 18,
+          gap: 10,
+          paddingBottom: 10,
           borderBottom: '1px solid var(--color-border)',
-          marginBottom: 22,
+          marginBottom: 12,
         }}
       >
         <div>
           <h2
             style={{
-              fontSize: 18,
+              fontSize: 16.5,
               fontWeight: 700,
               color: 'var(--color-primary)',
               margin: 0,
               letterSpacing: '-0.2px',
             }}
           >
-            Stage 1: Job Description & Candidate Resume
+            Job Description & Candidate Resume
           </h2>
         </div>
 
         {/* Difficulty Selector in the Top-Right Corner */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginLeft: 'auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginLeft: 'auto' }}>
           <span
             style={{
-              fontSize: 11.5,
+              fontSize: 11,
               fontWeight: 700,
               textTransform: 'uppercase',
               letterSpacing: '0.4px',
@@ -229,7 +234,7 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
               background: 'var(--color-surface-subtle)',
               border: '1px solid var(--color-border)',
               borderRadius: 'var(--radius-sm)',
-              padding: 2.5,
+              padding: 2,
               gap: 2,
             }}
           >
@@ -246,9 +251,9 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
                     border: 'none',
                     background: isSelected ? 'var(--color-primary)' : 'transparent',
                     color: isSelected ? '#FFFFFF' : 'var(--color-text-secondary)',
-                    fontSize: 12,
+                    fontSize: 11.5,
                     fontWeight: 600,
-                    padding: '4px 14px',
+                    padding: '3px 12px',
                     borderRadius: 'var(--radius-xs)',
                     cursor: 'pointer',
                     transition: 'all 140ms ease',
@@ -263,30 +268,33 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12, flex: 1, minHeight: 0, justifyContent: 'space-between' }}>
         {/* Two Main Input Sections: Job Description (Text Only) & Candidate Resume (Upload Only) */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-            gap: 22,
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: 14,
+            flex: 1,
+            minHeight: 0,
           }}
         >
           {/* Main Input Section 1: Job Description (TEXT ONLY) */}
           <div
             style={{
-              padding: '18px 20px',
+              padding: '14px 16px',
               borderRadius: 'var(--radius-sm)',
               background: 'var(--color-surface-subtle)',
               border: '1px solid var(--color-border)',
               display: 'flex',
               flexDirection: 'column',
-              gap: 14,
+              gap: 10,
+              minHeight: 0,
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <FileText size={18} style={{ color: 'var(--color-primary)' }} />
-              <h3 style={{ fontSize: 14.5, fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
+              <FileText size={16} style={{ color: 'var(--color-primary)' }} />
+              <h3 style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
                 1. Job Description & Requirements
               </h3>
             </div>
@@ -296,7 +304,7 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
               <label
                 className="form-label"
                 htmlFor="stage1-job-title"
-                style={{ fontSize: 12.5, fontWeight: 600 }}
+                style={{ fontSize: 11.5, fontWeight: 600, marginBottom: 3 }}
               >
                 Target Role / Job Title <span className="required-star">*</span>
               </label>
@@ -307,29 +315,30 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
                 placeholder="e.g. Senior Frontend Engineer (React & TypeScript)"
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
+                style={{ padding: '6px 10px', fontSize: 12.5 }}
               />
             </div>
 
             {/* Job Description Textarea (Text Only) */}
-            <div className="form-group" style={{ marginBottom: 0 }}>
+            <div className="form-group" style={{ marginBottom: 0, flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
               <div
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  marginBottom: 6,
+                  marginBottom: 4,
                 }}
               >
                 <label
                   className="form-label"
                   htmlFor="stage1-job-desc"
-                  style={{ marginBottom: 0, fontSize: 12.5, fontWeight: 600 }}
+                  style={{ marginBottom: 0, fontSize: 11.5, fontWeight: 600 }}
                 >
                   Job Description Requirements <span className="required-star">*</span>
                 </label>
                 <span
                   style={{
-                    fontSize: 11,
+                    fontSize: 10.5,
                     color: jobDescription.length < 20 ? 'var(--color-accent-terra)' : 'var(--color-text-secondary)',
                     fontWeight: 600,
                   }}
@@ -340,17 +349,18 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
               <textarea
                 id="stage1-job-desc"
                 className={`form-textarea ${errors.jobDescription ? 'input-error' : ''}`}
-                rows={9}
+                rows={4}
                 placeholder="Type or paste the job description, core responsibilities, technical stacks, architecture requirements, and qualification criteria..."
                 value={jobDescription}
                 onChange={(e) => {
                   setJobDescription(e.target.value);
                   if (errors.jobDescription) setErrors((prev) => ({ ...prev, jobDescription: null }));
                 }}
+                style={{ flex: 1, minHeight: '90px', maxHeight: '150px', padding: '6px 10px', fontSize: 12.5, resize: 'none' }}
               />
               {errors.jobDescription && (
-                <div className="error-text" style={{ marginTop: 4, display: 'flex', alignItems: 'center', gap: 4 }}>
-                  <AlertCircle size={13} />
+                <div className="error-text" style={{ marginTop: 3, display: 'flex', alignItems: 'center', gap: 4, fontSize: 11 }}>
+                  <AlertCircle size={12} />
                   {errors.jobDescription}
                 </div>
               )}
@@ -360,23 +370,24 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
           {/* Main Input Section 2: Candidate Resume (FILE UPLOAD ONLY - paste removed) */}
           <div
             style={{
-              padding: '18px 20px',
+              padding: '14px 16px',
               borderRadius: 'var(--radius-sm)',
               background: 'var(--color-surface-subtle)',
               border: '1px solid var(--color-border)',
               display: 'flex',
               flexDirection: 'column',
-              gap: 14,
+              gap: 10,
+              minHeight: 0,
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <Upload size={18} style={{ color: 'var(--color-primary)' }} />
-                <h3 style={{ fontSize: 14.5, fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
+                <Upload size={16} style={{ color: 'var(--color-primary)' }} />
+                <h3 style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
                   2. Candidate Resume Upload
                 </h3>
               </div>
-              <span className="badge badge-forest" style={{ fontSize: 11 }}>
+              <span className="badge badge-forest" style={{ fontSize: 10.5 }}>
                 File Upload Only
               </span>
             </div>
@@ -400,7 +411,8 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
                 tabIndex={0}
                 onKeyDown={(e) => e.key === 'Enter' && resumeFileInputRef.current?.click()}
                 style={{
-                  minHeight: 180,
+                  flex: 1,
+                  minHeight: 110,
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -409,29 +421,29 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
                   border: '1.5px dashed var(--color-border)',
                   borderRadius: 'var(--radius-sm)',
                   background: '#FFFFFF',
-                  padding: 24,
+                  padding: 16,
                   textAlign: 'center',
                   transition: 'border-color 140ms ease',
                 }}
               >
-                <Upload size={32} style={{ color: 'var(--color-text-secondary)', marginBottom: 8 }} />
-                <div style={{ fontSize: 13.5, fontWeight: 600, color: 'var(--color-primary)', marginBottom: 4 }}>
+                <Upload size={26} style={{ color: 'var(--color-text-secondary)', marginBottom: 6 }} />
+                <div style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-primary)', marginBottom: 2 }}>
                   Click to upload candidate resume
                 </div>
-                <div style={{ fontSize: 11.5, color: 'var(--color-text-secondary)' }}>
+                <div style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>
                   Supports PDF, TXT, DOCX, MD (maximum 5MB)
                 </div>
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <div className="uploaded-file-pill">
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <FileCode size={20} style={{ color: 'var(--color-primary)' }} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
+                <div className="uploaded-file-pill" style={{ padding: '8px 12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <FileCode size={18} style={{ color: 'var(--color-primary)' }} />
                     <div>
-                      <div style={{ fontWeight: 600, fontSize: 13, color: 'var(--color-primary)' }}>
+                      <div style={{ fontWeight: 600, fontSize: 12.5, color: 'var(--color-primary)' }}>
                         {resumeFile.name}
                       </div>
-                      <div style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>
+                      <div style={{ fontSize: 10.5, color: 'var(--color-text-secondary)' }}>
                         {Math.round(resumeFile.size / 1024)} KB • Attached & Ready for Analysis
                       </div>
                     </div>
@@ -440,34 +452,19 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
                     type="button"
                     className="btn-ghost"
                     onClick={handleRemoveResumeFile}
-                    style={{ padding: '4px', color: 'var(--color-accent-terra)' }}
+                    style={{ padding: '3px', color: 'var(--color-accent-terra)' }}
                     title="Remove attached file"
                     aria-label="Remove attached resume"
                   >
-                    <X size={16} />
+                    <X size={15} />
                   </button>
-                </div>
-
-                <div
-                  style={{
-                    padding: '12px 14px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'var(--color-bg-canvas)',
-                    border: '1px solid var(--color-border)',
-                    fontSize: 12,
-                    color: 'var(--color-text-secondary)',
-                    lineHeight: 1.45,
-                  }}
-                >
-                  <strong style={{ color: 'var(--color-primary)' }}>File Attached:</strong>{' '}
-                  {resumeFile.name}. InterviewIQ will extract competency matches, prior architecture ownership, and candidate proficiency from this document in Stage 2.
                 </div>
               </div>
             )}
 
             {errors.resume && (
-              <div className="error-text" style={{ marginTop: 2, display: 'flex', alignItems: 'center', gap: 4 }}>
-                <AlertCircle size={13} />
+              <div className="error-text" style={{ marginTop: 2, display: 'flex', alignItems: 'center', gap: 4, fontSize: 11 }}>
+                <AlertCircle size={12} />
                 {errors.resume}
               </div>
             )}
@@ -477,13 +474,13 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
         {/* Action Bar Below Inputs: Duration & Prominent Analyze Button */}
         <div
           style={{
-            paddingTop: 18,
+            paddingTop: 10,
             borderTop: '1px solid var(--color-border)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: 16,
+            gap: 12,
           }}
         >
           {/* Duration Selector */}
@@ -504,9 +501,9 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
             </span>
             <div className="pill-radio-group">
               {[
-                { val: 30, label: '30 min (Express • 4 Qs)' },
-                { val: 45, label: '45 min (Standard • 6 Qs)' },
-                { val: 60, label: '60 min (Deep • 8 Qs)' },
+                { val: 30, label: '30 min (Express • 8 Qs)' },
+                { val: 45, label: '45 min (Standard • 12 Qs)' },
+                { val: 60, label: '60 min (Deep • 18 Qs)' },
               ].map((d) => (
                 <button
                   key={d.val}
@@ -548,7 +545,7 @@ export function Stage1RoleResume({ onAnalyzeComplete }) {
             ) : (
               <>
                 <Sparkles size={16} />
-                Analyze Skills & Candidate Fit
+                Extract skills
               </>
             )}
           </button>

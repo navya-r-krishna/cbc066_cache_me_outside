@@ -67,7 +67,17 @@ export function DashboardView() {
   };
 
   return (
-    <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <div
+      className="animate-fade-in"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 12,
+        height: '100%',
+        maxHeight: '100%',
+        overflow: 'hidden',
+      }}
+    >
       {/* 4-Stage Progressive Workflow Stepper on the Dashboard */}
       <StageStepper
         currentStage={currentStage}
@@ -76,7 +86,9 @@ export function DashboardView() {
       />
 
       {/* Active Stage Content (Role & Resume -> Skill Matching -> Question Generation -> Candidate Score) */}
-      {renderActiveStage()}
+      <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        {renderActiveStage()}
+      </div>
     </div>
   );
 }

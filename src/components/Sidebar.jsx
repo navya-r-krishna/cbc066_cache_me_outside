@@ -17,7 +17,7 @@ export function Sidebar({ mobileOpen, onCloseMobile }) {
   const navItems = [
     {
       id: 'dashboard',
-      label: 'Dashboard',
+      label: 'Home',
       icon: LayoutDashboard,
     },
     {

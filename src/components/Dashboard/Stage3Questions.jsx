@@ -120,27 +120,39 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
   };
 
   return (
-    <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <div
+      className="animate-fade-in"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 8,
+        height: '100%',
+        maxHeight: '100%',
+        overflow: 'hidden',
+        justifyContent: 'space-between',
+      }}
+    >
       {/* Stage Header - Heading Only with Corner Controls */}
       <div
         className="card"
         style={{
-          padding: '20px 24px',
+          padding: '8px 14px',
           background: '#FFFFFF',
           border: '1px solid var(--color-border)',
           borderRadius: 'var(--radius-md)',
+          flexShrink: 0,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 14 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
           <div>
-            <h2 style={{ fontSize: 18, fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
+            <h2 style={{ fontSize: 16, fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>
               Stage 3: Question Formulation & Candidate Response
             </h2>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <span className="badge badge-forest">{total} Questions</span>
-            <span className="badge badge-success">{answeredCount} Answered</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+            <span className="badge badge-forest" style={{ fontSize: 11, padding: '3px 7px' }}>{total} Questions</span>
+            <span className="badge badge-success" style={{ fontSize: 11, padding: '3px 7px' }}>{answeredCount} Answered</span>
             {onRestart && (
               <button
                 type="button"
@@ -149,9 +161,9 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: 6,
-                  fontSize: 12,
-                  padding: '6px 12px',
+                  gap: 5,
+                  fontSize: 11.5,
+                  padding: '4px 9px',
                   borderRadius: 'var(--radius-sm)',
                   color: 'var(--color-primary)',
                   background: '#FFFFFF',
@@ -159,7 +171,7 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
                 }}
                 title="Reset and start fresh"
               >
-                <RotateCcw size={13} /> Start New Formulation
+                <RotateCcw size={12} /> Start New Formulation
               </button>
             )}
           </div>
@@ -170,14 +182,15 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
       <div
         className="card"
         style={{
-          padding: '12px 16px',
+          padding: '6px 12px',
           background: '#FFFFFF',
           border: '1px solid var(--color-border)',
           borderRadius: 'var(--radius-md)',
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
+          gap: 6,
           overflowX: 'auto',
+          flexShrink: 0,
         }}
       >
         {questions.map((q, idx) => {
@@ -190,7 +203,7 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
               type="button"
               onClick={() => setActiveQuestionIndex(idx)}
               style={{
-                padding: '8px 16px',
+                padding: '5px 12px',
                 borderRadius: 'var(--radius-sm)',
                 border: isActive
                   ? '1.5px solid var(--color-primary)'
@@ -207,19 +220,19 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
                   : hasAnswer
                   ? 'var(--color-primary)'
                   : 'var(--color-text-main)',
-                fontSize: 13,
+                fontSize: 12,
                 fontWeight: isActive ? 700 : 600,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 6,
+                gap: 5,
                 whiteSpace: 'nowrap',
                 transition: 'all 120ms ease',
               }}
             >
               {hasAnswer && (
                 <Check
-                  size={12}
+                  size={11}
                   style={{
                     color: isActive ? '#FFFFFF' : 'var(--color-success-text)',
                     strokeWidth: 3,
@@ -237,28 +250,32 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
         <div
           className="card animate-fade-in"
           style={{
-            padding: '24px 26px',
+            padding: '12px 16px',
             background: '#FFFFFF',
             border: '1px solid var(--color-border)',
             borderRadius: 'var(--radius-md)',
             display: 'flex',
             flexDirection: 'column',
-            gap: 16,
+            gap: 8,
+            flex: 1,
+            minHeight: 0,
+            justifyContent: 'space-between',
+            overflow: 'hidden',
           }}
         >
           {/* Header Badges */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span className="badge badge-forest" style={{ fontSize: 11.5 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span className="badge badge-forest" style={{ fontSize: 11 }}>
                 Question {activeQuestionIndex + 1} • {currentQuestion.competency || 'Technical Skills'}
               </span>
-              <span className="badge badge-sage" style={{ fontSize: 11.5 }}>
+              <span className="badge badge-sage" style={{ fontSize: 11 }}>
                 Difficulty: {currentQuestion.difficulty || 'Medium'}
               </span>
             </div>
 
             {(candidateAnswers[currentQuestion.id] || '').trim().length > 0 && (
-              <span className="badge badge-success" style={{ fontSize: 11.5 }}>
+              <span className="badge badge-success" style={{ fontSize: 11 }}>
                 ✓ Answer Recorded
               </span>
             )}
@@ -267,10 +284,10 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
           {/* Main Question Text */}
           <div
             style={{
-              fontSize: 16,
+              fontSize: 14.5,
               fontWeight: 700,
               color: 'var(--color-primary)',
-              lineHeight: 1.45,
+              lineHeight: 1.35,
             }}
           >
             {currentQuestion.question}
@@ -280,18 +297,18 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
           <div
             style={{
               background: 'var(--color-surface-subtle)',
-              padding: '14px 16px',
+              padding: '8px 12px',
               borderRadius: 'var(--radius-sm)',
               border: '1px solid var(--color-border)',
-              borderLeft: '4px solid var(--color-primary)',
+              borderLeft: '3.5px solid var(--color-primary)',
               display: 'flex',
               flexDirection: 'column',
-              gap: 4,
+              gap: 2,
             }}
           >
             <div
               style={{
-                fontSize: 11,
+                fontSize: 10.5,
                 fontWeight: 700,
                 color: 'var(--color-primary)',
                 textTransform: 'uppercase',
@@ -300,41 +317,44 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
             >
               Question Description & Context:
             </div>
-            <div style={{ fontSize: 13, color: 'var(--color-text-main)', lineHeight: 1.5 }}>
+            <div style={{ fontSize: 12, color: 'var(--color-text-main)', lineHeight: 1.4 }}>
               {currentQuestion.whyRelevant ||
                 `Evaluate the candidate's practical execution, engineering depth, and problem-solving methodology regarding ${currentQuestion.skillName || currentQuestion.competency}.`}
             </div>
           </div>
 
           {/* Candidate Answer Textarea Input */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 4 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1, minHeight: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <label
                 style={{
-                  fontSize: 13,
+                  fontSize: 12,
                   fontWeight: 700,
                   color: 'var(--color-primary)',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 6,
+                  gap: 5,
                 }}
               >
-                <MessageSquare size={15} /> Candidate's Answer:
+                <MessageSquare size={14} /> Candidate's Answer:
               </label>
-              <span style={{ fontSize: 11.5, color: 'var(--color-text-secondary)' }}>
+              <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>
                 {(candidateAnswers[currentQuestion.id] || '').length} characters
               </span>
             </div>
 
             <textarea
-              rows={6}
+              rows={3}
               className="form-input"
               style={{
                 width: '100%',
-                padding: '12px 14px',
-                fontSize: 13.5,
-                lineHeight: 1.55,
-                resize: 'vertical',
+                flex: 1,
+                minHeight: '70px',
+                maxHeight: '110px',
+                padding: '8px 10px',
+                fontSize: 12.5,
+                lineHeight: 1.45,
+                resize: 'none',
                 background: '#FFFFFF',
                 border: '1.5px solid var(--color-border)',
                 borderRadius: 'var(--radius-sm)',
@@ -353,7 +373,7 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              paddingTop: 10,
+              paddingTop: 6,
               borderTop: '1px solid var(--color-border)',
             }}
           >
@@ -362,12 +382,12 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
               className="btn-secondary"
               onClick={() => setActiveQuestionIndex((prev) => Math.max(0, prev - 1))}
               disabled={activeQuestionIndex === 0}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5 }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11.5, padding: '4px 10px' }}
             >
-              <ChevronLeft size={14} /> Previous Question
+              <ChevronLeft size={13} /> Previous Question
             </button>
 
-            <span style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--color-text-secondary)' }}>
+            <span style={{ fontSize: 11.5, fontWeight: 600, color: 'var(--color-text-secondary)' }}>
               Question {activeQuestionIndex + 1} of {questions.length}
             </span>
 
@@ -378,9 +398,9 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
                 setActiveQuestionIndex((prev) => Math.min(questions.length - 1, prev + 1))
               }
               disabled={activeQuestionIndex === questions.length - 1}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12.5 }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11.5, padding: '4px 10px' }}
             >
-              Next Question <ChevronRight size={14} />
+              Next Question <ChevronRight size={13} />
             </button>
           </div>
         </div>
@@ -390,7 +410,7 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
       <div
         className="card"
         style={{
-          padding: '16px 24px',
+          padding: '8px 16px',
           background: '#FFFFFF',
           border: '1px solid var(--color-border)',
           borderRadius: 'var(--radius-md)',
@@ -398,16 +418,17 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: 14,
+          gap: 10,
+          flexShrink: 0,
         }}
       >
         <button
           type="button"
           className="btn-secondary"
           onClick={onBack}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 7 }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, padding: '5px 12px' }}
         >
-          <ArrowLeft size={15} /> Back to Skill Matching
+          <ArrowLeft size={14} /> Back to Skill Matching
         </button>
 
         <button
@@ -417,18 +438,18 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
           style={{
             background: 'var(--color-primary)',
             color: '#FFFFFF',
-            padding: '12px 28px',
-            fontSize: 14,
+            padding: '8px 20px',
+            fontSize: 13,
             fontWeight: 700,
             borderRadius: 'var(--radius-sm)',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 8,
+            gap: 6,
             boxShadow: 'var(--shadow-sm)',
           }}
         >
           Proceed to Candidate Scorecard
-          <ChevronRight size={16} />
+          <ChevronRight size={15} />
         </button>
       </div>
     </div>
