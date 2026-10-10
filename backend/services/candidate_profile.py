@@ -8,6 +8,10 @@ except ImportError:
     from resume_parser import parse_resume_text, parse_resume_pdf
 
 
+# --------------------------------------------------
+# SCORING CONFIGURATION
+# --------------------------------------------------
+
 FACTOR_WEIGHTS = {
     "skills": 0.40,
     "experience": 0.30,
@@ -17,6 +21,10 @@ FACTOR_WEIGHTS = {
 
 INTERNSHIP_CREDIT = 0.50
 
+
+# --------------------------------------------------
+# BUILD CANDIDATE PROFILE
+# --------------------------------------------------
 
 def build_candidate_profile(
     resume_text: str | None = None,
@@ -43,13 +51,11 @@ def build_candidate_profile(
     skills = parsed.get("skills", [])
     sections = parsed.get("sections", {})
 
-    skill_names = list(
-        dict.fromkeys(
-            skill["name"]
-            for skill in skills
-            if skill.get("name")
-        )
-    )
+    skill_names = list(dict.fromkeys(
+        skill["name"]
+        for skill in skills
+        if skill.get("name")
+    ))
 
     summary_parts = [
         sections.get(key, "")
@@ -77,6 +83,7 @@ def build_candidate_profile(
         ),
         "education": parsed.get("education", []),
         "experience_entries": parsed.get("experience_entries", []),
+        "project_entries": parsed.get("project_entries", []),
         "resume_summary": "\n".join(summary_parts),
         "candidate_type": parsed.get(
             "candidate_type",
@@ -87,47 +94,83 @@ def build_candidate_profile(
     }
 
 
+# --------------------------------------------------
+# EXPERIENCE REQUIREMENT EXTRACTION
+# --------------------------------------------------
+
 def extract_requested_years(
     job_description: str | None,
 ) -> float | None:
-    """Extract an explicit minimum experience requirement."""
+    """
+    Extract an explicitly stated experience requirement.
+
+    Returns:
+        Positive number: minimum required years.
+        0.0: freshers are explicitly welcome or no experience is required.
+        None: requirement is missing or ambiguous.
+    """
 
     if not job_description:
         return None
 
-    text = job_description.casefold()
+    text = re.sub(r"\s+", " ", job_description.casefold())
 
-    patterns = [
-        r"(?:at least|minimum of|min\.?)\s+"
-        r"(\d+(?:\.\d+)?)\s*\+?\s*(?:years?|yrs?)"
-        r"\s+(?:of\s+)?experience",
-
-        r"(\d+(?:\.\d+)?)\s*\+?\s*(?:years?|yrs?)"
-        r"\s+(?:of\s+)?experience\s+"
-        r"(?:is\s+)?(?:required|minimum)",
-
-        r"experience\s+(?:of\s+)?"
-        r"(\d+(?:\.\d+)?)\s*\+?\s*(?:years?|yrs?)",
+    zero_experience_patterns = [
+        r"\bno\s+(?:prior\s+|previous\s+)?experience\s+"
+        r"(?:is\s+)?(?:required|needed|necessary)\b",
+        r"\b(?:freshers|fresh graduates|recent graduates)\s+"
+        r"(?:are\s+)?welcome\b",
+        r"\bentry[\s-]?level\b",
+        r"\b(?:0|zero)\s+(?:years?|yrs?)\s+"
+        r"(?:of\s+)?experience\b",
     ]
 
-    for pattern in patterns:
+    for pattern in zero_experience_patterns:
+        if re.search(pattern, text):
+            return 0.0
+
+    positive_patterns = [
+        r"\b(?:at least|minimum of|min\.?)\s+"
+        r"(\d+(?:\.\d+)?)\s*\+?\s*(?:years?|yrs?)\s+"
+        r"(?:of\s+)?experience\b",
+
+        r"\b(\d+(?:\.\d+)?)\s*\+?\s*(?:years?|yrs?)\s+"
+        r"(?:of\s+)?experience\s+(?:is\s+)?"
+        r"(?:required|minimum)\b",
+
+        r"\bexperience\s+(?:of\s+)?"
+        r"(\d+(?:\.\d+)?)\s*\+?\s*(?:years?|yrs?)\b",
+
+        r"\b(\d+(?:\.\d+)?)\s*\+\s*(?:years?|yrs?)\s+"
+        r"(?:of\s+)?experience\b",
+    ]
+
+    for pattern in positive_patterns:
         match = re.search(pattern, text)
 
         if match:
-            return float(match.group(1))
+            years = float(match.group(1))
+
+            if years > 0:
+                return years
 
     return None
 
 
+# --------------------------------------------------
+# TEXT NORMALIZATION
+# --------------------------------------------------
+
 def normalize_role_terms(text: str) -> set[str]:
-    """Extract meaningful words for basic role-relevance comparison."""
+    """Extract meaningful words for role-relevance comparison."""
 
     ignored = {
-        "and", "the", "for", "with", "from", "that",
-        "this", "have", "has", "had", "our", "your",
-        "senior", "junior", "associate", "intern",
-        "lead", "principal", "expert", "years",
-        "year", "experience", "work", "working",
+        "and", "the", "for", "with", "from", "that", "this",
+        "have", "has", "had", "our", "your", "senior", "junior",
+        "associate", "intern", "lead", "principal", "expert",
+        "years", "year", "experience", "work", "working",
+        "developer", "development", "engineer", "engineering",
+        "role", "position", "candidate",
     }
 
     return {
@@ -137,48 +180,191 @@ def normalize_role_terms(text: str) -> set[str]:
     }
 
 
+# --------------------------------------------------
+# ROLE RELEVANCE
+# --------------------------------------------------
+
 def calculate_role_relevance(
     candidate_profile: dict[str, Any],
     role_title: str,
 ) -> float | None:
-    """Estimate role relevance from summary and experience evidence."""
+    """
+    Estimate role relevance using the resume summary, work experience,
+    projects, and technical skills.
 
-    if not role_title.strip():
+    Projects provide technical evidence but are not treated as employment.
+    This is a heuristic, not semantic matching.
+    """
+
+    if not role_title or not role_title.strip():
         return None
 
+    role = role_title.casefold()
     role_terms = normalize_role_terms(role_title)
 
     if not role_terms:
         return None
 
-    evidence_parts = [candidate_profile.get("resume_summary", "")]
+    summary = candidate_profile.get("resume_summary", "")
+    if not isinstance(summary, str):
+        summary = ""
 
-    for entry in candidate_profile.get("experience_entries", []):
-        if isinstance(entry, dict):
-            evidence_parts.append(entry.get("text", ""))
+    experience_entries = candidate_profile.get(
+        "experience_entries", []
+    )
+    project_entries = candidate_profile.get(
+        "project_entries", []
+    )
+    skills = candidate_profile.get("skills", [])
 
-    evidence_text = " ".join(
-        part for part in evidence_parts if isinstance(part, str)
-    ).strip()
+    def collect_entry_text(entries: list) -> str:
+        parts = []
 
-    if not evidence_text:
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+
+            text = entry.get("text", "")
+
+            if isinstance(text, str):
+                parts.append(text)
+
+        return " ".join(parts)
+
+    experience_text = collect_entry_text(experience_entries)
+    project_text = collect_entry_text(project_entries)
+
+    summary_terms = normalize_role_terms(summary)
+    experience_terms = normalize_role_terms(experience_text)
+    project_terms = normalize_role_terms(project_text)
+
+    skill_names = {
+        skill.casefold().strip()
+        for skill in skills
+        if isinstance(skill, str)
+    }
+
+    # Measure exact role-term overlap across different evidence sources.
+    evidence = []
+
+    if summary_terms:
+        evidence.append((
+            len(role_terms & summary_terms) / len(role_terms),
+            0.15,
+        ))
+
+    if experience_terms:
+        evidence.append((
+            len(role_terms & experience_terms) / len(role_terms),
+            0.25,
+        ))
+
+    if project_terms:
+        evidence.append((
+            len(role_terms & project_terms) / len(role_terms),
+            0.30,
+        ))
+
+    if skill_names:
+        evidence.append((
+            len(role_terms & skill_names) / len(role_terms),
+            0.30,
+        ))
+
+    if not evidence:
         return None
 
-    evidence_terms = normalize_role_terms(evidence_text)
+    total_weight = sum(weight for _, weight in evidence)
 
-    if not evidence_terms:
-        return None
+    score = sum(
+        value * weight
+        for value, weight in evidence
+    ) / total_weight
 
-    overlap = len(role_terms & evidence_terms) / len(role_terms)
+    # Role-specific technical evidence.
+    # This supplements title overlap; it does not replace skill coverage.
+    role_skill_groups = {
+        "data": {
+            "python",
+            "sql",
+            "pandas",
+            "numpy",
+            "excel",
+            "google sheets",
+            "data visualization",
+            "machine learning",
+            "scikit-learn",
+            "xgboost",
+            "plotly",
+            "streamlit",
+        },
+        "backend": {
+            "java",
+            "spring boot",
+            "node.js",
+            "express.js",
+            "rest apis",
+            "mongodb",
+            "postgresql",
+            "authentication",
+            "jwt",
+            "api development",
+            "microservices",
+        },
+    }
 
-    return round(overlap * 100, 2)
+    relevant_group = None
 
+    if any(term in role for term in (
+        "data analyst",
+        "data analytics",
+        "data scientist",
+        "data science",
+        "business analyst",
+    )):
+        relevant_group = role_skill_groups["data"]
+
+    elif any(term in role for term in (
+        "backend",
+        "back-end",
+        "back end",
+        "java developer",
+    )):
+        relevant_group = role_skill_groups["backend"]
+
+    if relevant_group:
+        project_text_lower = project_text.casefold()
+
+        matched_role_skills = {
+            skill
+            for skill in relevant_group
+            if skill in skill_names
+            or skill in project_text_lower
+        }
+
+        if matched_role_skills:
+            coverage = min(
+                len(matched_role_skills) / 5,
+                1.0,
+            )
+
+            score = 0.70 * score + 0.30 * coverage
+
+    return round(
+        min(max(score, 0.0), 1.0) * 100,
+        2,
+    )
+
+
+# --------------------------------------------------
+# RELEVANT INTERNSHIP DURATION
+# --------------------------------------------------
 
 def calculate_relevant_internship_months(
     candidate_profile: dict[str, Any],
     role_title: str,
 ) -> int:
-    """Estimate duration of internships related to the target role."""
+    """Estimate the duration of internships relevant to the target role."""
 
     role_terms = normalize_role_terms(role_title)
 
@@ -195,10 +381,13 @@ def calculate_relevant_internship_months(
             continue
 
         entry_text = entry.get("text", "")
-        entry_terms = normalize_role_terms(entry_text)
 
-        # Require at least one meaningful role-term overlap.
-        if not role_terms.intersection(entry_terms):
+        if not isinstance(entry_text, str):
+            continue
+
+        if not role_terms.intersection(
+            normalize_role_terms(entry_text)
+        ):
             continue
 
         for date_range in entry.get("date_ranges", []):
@@ -221,7 +410,9 @@ def calculate_relevant_internship_months(
                 end_index = end_year * 12 + end_month
 
                 if end_index > start_index:
-                    relevant_ranges.append((start_index, end_index))
+                    relevant_ranges.append(
+                        (start_index, end_index)
+                    )
 
             except (KeyError, TypeError, ValueError):
                 continue
@@ -229,8 +420,8 @@ def calculate_relevant_internship_months(
     if not relevant_ranges:
         return 0
 
-    # Merge overlapping relevant internship periods to avoid double counting.
     relevant_ranges.sort()
+
     total_months = 0
     current_start, current_end = relevant_ranges[0]
 
@@ -244,29 +435,36 @@ def calculate_relevant_internship_months(
     return total_months + current_end - current_start
 
 
+# --------------------------------------------------
+# ACADEMIC SCORING
+# --------------------------------------------------
+
 def calculate_academic_score(
     candidate_profile: dict[str, Any],
 ) -> float | None:
     """
-    Academic score is unavailable until grades and job requirements
-    can be evaluated reliably.
+    Academic scoring is unavailable until grades and job-specific
+    qualification requirements can be compared reliably.
     """
 
-    # An education entry alone does not establish academic performance
-    # or whether a qualification satisfies a particular job requirement.
     return None
 
+
+# --------------------------------------------------
+# CANDIDATE-TO-JOB COMPARISON
+# --------------------------------------------------
 
 def compare_candidate_to_job(
     candidate_profile: dict[str, Any],
     job_analysis: dict[str, Any],
     job_description: str | None = None,
 ) -> dict[str, Any]:
-    """Compare skills and calculate a transparent provisional score."""
+    """Compare candidate skills and calculate a provisional score."""
 
     candidate_skills = {
         name.casefold()
         for name in candidate_profile.get("skills", [])
+        if isinstance(name, str)
     }
 
     weighted_skills = job_analysis.get("weighted_skills", [])
@@ -298,7 +496,8 @@ def compare_candidate_to_job(
     )
 
     matched_weight = sum(
-        item["weight"] for item in matched_skills
+        item["weight"]
+        for item in matched_skills
     )
 
     skill_coverage = (
@@ -312,7 +511,11 @@ def compare_candidate_to_job(
 
     professional_months = max(
         0,
-        int(candidate_profile.get("professional_experience_months", 0) or 0),
+        int(
+            candidate_profile.get(
+                "professional_experience_months", 0
+            ) or 0
+        ),
     )
 
     relevant_internship_months = calculate_relevant_internship_months(
@@ -325,14 +528,17 @@ def compare_candidate_to_job(
         + relevant_internship_months * INTERNSHIP_CREDIT
     )
 
+    # Do not automatically award full experience marks to freshers.
     experience_score = None
 
     if requested_years is not None and requested_years > 0:
         required_months = requested_years * 12
 
         experience_score = round(
-            min(equivalent_experience_months / required_months, 1.0)
-            * 100,
+            min(
+                equivalent_experience_months / required_months,
+                1.0,
+            ) * 100,
             2,
         )
 
@@ -356,19 +562,15 @@ def compare_candidate_to_job(
         if score is not None
     }
 
-    available_weight = sum(
-        FACTOR_WEIGHTS[name]
-        for name in available_factors
-    )
-
+    # Preserve fixed weights instead of inflating missing factors.
     overall_score = None
 
-    if available_weight > 0:
+    if available_factors:
         overall_score = round(
             sum(
                 score * FACTOR_WEIGHTS[name]
                 for name, score in available_factors.items()
-            ) / available_weight,
+            ),
             2,
         )
 
@@ -380,6 +582,8 @@ def compare_candidate_to_job(
 
     if overall_score is None:
         candidate_band = "insufficient_data"
+    elif unavailable_factors:
+        candidate_band = "provisional_match"
     elif overall_score >= 75:
         candidate_band = "strong_match"
     elif overall_score >= 50:
@@ -390,14 +594,16 @@ def compare_candidate_to_job(
     warnings = [
         "Detected skills do not prove proficiency.",
         "The overall score is a heuristic, not a validated hiring prediction.",
-        "Available factors are reweighted when other factors cannot be assessed.",
-        (
-            "Relevant internship months receive 50% credit relative to "
-            "professional experience for the experience score."
-        ),
+        "Unavailable factors are not rescaled; the overall score may be lower when evidence is missing.",
+        "Relevant internship months receive 50% credit relative to professional experience for the experience score.",
     ]
 
-    if requested_years is None:
+    if requested_years == 0:
+        warnings.append(
+            "No prior experience is required or freshers are welcome; "
+            "experience was excluded from scoring."
+        )
+    elif requested_years is None:
         warnings.append(
             "Experience score is unavailable because an explicit "
             "experience requirement was not extracted."
@@ -406,24 +612,23 @@ def compare_candidate_to_job(
     if role_score is None:
         warnings.append(
             "Role relevance could not be estimated from available "
-            "summary or experience evidence."
+            "summary, experience, project, or skill evidence."
         )
 
     if academic_score is None:
         warnings.append(
-            "Academic score is unavailable because grades and job-specific "
-            "qualification requirements are not assessed."
+            "Academic score is unavailable because grades and "
+            "job-specific qualification requirements are not assessed."
         )
 
     if unavailable_factors:
         warnings.append(
             "Unavailable scoring factors: "
             + ", ".join(unavailable_factors)
-            + ". The overall score is provisional."
+            + ". The overall score and candidate band are provisional."
         )
 
     return {
-        # Existing API fields are preserved.
         "matched_skills": matched_skills,
         "missing_skills": missing_skills,
         "strengths": [
@@ -444,8 +649,6 @@ def compare_candidate_to_job(
         ),
         "low_info": job_analysis.get("low_info", False),
         "warnings": warnings,
-
-        # New scoring fields.
         "factor_scores": factor_scores,
         "factor_weights": FACTOR_WEIGHTS.copy(),
         "overall_score": overall_score,
@@ -464,6 +667,10 @@ def compare_candidate_to_job(
     }
 
 
+# --------------------------------------------------
+# LOCAL TEST
+# --------------------------------------------------
+
 if __name__ == "__main__":
     sample_resume = """
     PROFESSIONAL SUMMARY
@@ -473,25 +680,28 @@ if __name__ == "__main__":
     Python, SQL, Pandas, Machine Learning
 
     INTERNSHIPS
+
     Data Analyst Intern
     Example Company
     Jan 2025 - Jun 2025
 
-    EDUCATION
-    Bachelor of Computer Applications
-    2023 - 2026
+    PROJECTS
+
+    Cricket Analytics Dashboard
+    Python, Pandas, SQL
     """
 
     sample_job_description = """
     Data Analyst
-
     Required skills include Python, SQL, Pandas, and Excel.
     Machine Learning and Data Visualization are preferred.
     The candidate must have at least 2 years of experience.
     Strong communication skills are required.
     """
 
-    candidate = build_candidate_profile(resume_text=sample_resume)
+    candidate = build_candidate_profile(
+        resume_text=sample_resume
+    )
 
     try:
         from .skill_analysis import analyze_job

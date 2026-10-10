@@ -11,6 +11,7 @@ DATA_PATH = (
     / "skills.json"
 )
 
+
 AMBIGUOUS_ALIASES = {
     "C", "R", "Go", "BI", "RL", "CV", "OS", "TS",
     "JS", "DL", "ML", "QA", "DSA", "NLP", "EDA",
@@ -20,7 +21,7 @@ AMBIGUOUS_ALIASES = {
 
 
 def load_skills() -> list[dict[str, Any]]:
-    """Load and validate skills from skills.json."""
+    """Load and validate the skill dictionary."""
 
     with DATA_PATH.open("r", encoding="utf-8") as file:
         data = json.load(file)
@@ -35,11 +36,11 @@ def load_skills() -> list[dict[str, Any]]:
     seen_names = set()
 
     for skill in skills:
-        required = ("name", "synonyms", "competency")
+        if not isinstance(skill, dict):
+            raise ValueError(f"Invalid skill entry: {skill}")
 
-        if not isinstance(skill, dict) or not all(
-            key in skill for key in required
-        ):
+        required = ("name", "synonyms", "competency")
+        if not all(key in skill for key in required):
             raise ValueError(f"Invalid skill entry: {skill}")
 
         if not isinstance(skill["name"], str) or not skill["name"].strip():
@@ -64,7 +65,7 @@ def load_skills() -> list[dict[str, Any]]:
 
 
 def build_pattern(term: str) -> re.Pattern:
-    """Create a case-insensitive pattern with safe word boundaries."""
+    """Match complete aliases without matching inside larger words."""
 
     escaped = re.escape(term.strip())
     escaped = escaped.replace(r"\ ", r"\s+")
@@ -75,10 +76,8 @@ def build_pattern(term: str) -> re.Pattern:
     )
 
 
-def split_sentences(
-    text: str,
-) -> list[tuple[int, int, str]]:
-    """Split sentences without breaking technical names at their dots."""
+def split_sentences(text: str) -> list[tuple[int, int, str]]:
+    """Split sentences while preserving offsets."""
 
     protected = re.sub(
         r"(?i)(?<!\w)(?:Node\.js|React\.js|Next\.js|Vue\.js|\.NET)",
@@ -86,15 +85,22 @@ def split_sentences(
         text,
     )
 
-    pattern = re.compile(r"[^.!?\n]+(?:[.!?]+|$)")
+    pattern = re.compile(r"[^.!?\n]+(?:[.!?]+|(?=\n)|$)")
     sentences = []
 
     for match in pattern.finditer(protected):
         start, end = match.span()
-        sentence = text[start:end].strip()
+        raw_sentence = text[start:end]
+        sentence = raw_sentence.strip()
 
-        if sentence:
-            sentences.append((start, end, sentence))
+        if not sentence:
+            continue
+
+        leading = len(raw_sentence) - len(raw_sentence.lstrip())
+        actual_start = start + leading
+        actual_end = actual_start + len(sentence)
+
+        sentences.append((actual_start, actual_end, sentence))
 
     return sentences
 
@@ -113,7 +119,7 @@ def find_sentence(
 
 
 def has_technical_context(sentence: str) -> bool:
-    """Check for technical clues in the same sentence."""
+    """Check for nearby technical clues."""
 
     sentence = sentence.casefold()
 
@@ -143,6 +149,7 @@ def has_technical_context(sentence: str) -> bool:
     return any(cue in sentence for cue in cues)
 
 
+
 def has_alias_context(
     text: str,
     start: int,
@@ -150,68 +157,80 @@ def has_alias_context(
     alias: str,
     sentences: list[tuple[int, int, str]],
 ) -> bool:
-    """Filter ambiguous aliases using local sentence context."""
+    """Filter ambiguous aliases using local context."""
 
-    if alias.casefold() not in {
-        item.casefold() for item in AMBIGUOUS_ALIASES
-    }:
-        return True
-
+    alias_lower = alias.casefold()
     sentence = find_sentence(start, sentences)
     sentence_lower = sentence.casefold()
-    alias_lower = alias.casefold()
 
-    if alias_lower == "bi":
-        # Do not treat the BI in Power BI as a separate skill.
-        prefix = text[max(0, start - 12):start].casefold()
-
-        if re.search(r"\bpower\s+$", prefix):
+    # Do not match JS inside Node.js, React.js, Next.js, etc.
+    if alias_lower == "js":
+        if start > 0 and text[start - 1] == ".":
             return False
 
-        # Accept the full phrase Business Intelligence.
-        if "business intelligence" in sentence_lower:
-            return True
+    # Handle ambiguous short aliases.
+    if alias_lower in {"bi", "bi reporting", "c", "r", "go", "ts", "ml", "dl"}:
 
-        # A standalone BI abbreviation needs technical context.
+        # BI / BI Reporting
+        if alias_lower in {"bi", "bi reporting"}:
+            prefix = text[max(0, start - 20):start].casefold()
+
+            # Prevent "BI reporting" from matching inside
+            # "Power BI reporting".
+            if re.search(r"\bpower\s+$", prefix):
+                return False
+
+            # Accept the full phrase Business Intelligence.
+            if "business intelligence" in sentence_lower:
+                return True
+
+            return has_technical_context(sentence)
+
+        # Go programming language
+        if alias_lower == "go":
+            # Reject ordinary lowercase "go".
+            if text[start:end] != "Go":
+                return False
+
+            after = text[end:end + 40].casefold()
+
+            if re.match(
+                r"\s+(programming|developer|development|language)\b",
+                after,
+            ):
+                return True
+
+            return has_technical_context(sentence)
+
+        # C programming language
+        if alias_lower == "c":
+            # Never match C inside C++ or C#.
+            if end < len(text) and text[end] in "+#":
+                return False
+
+            return has_technical_context(sentence)
+
+        # R programming language
+        if alias_lower == "r":
+            return has_technical_context(sentence)
+
+        # Other ambiguous abbreviations.
         return has_technical_context(sentence)
 
-    if alias_lower == "go":
-        # Reject lowercase ordinary-language "go".
-        if text[start:end] != "Go":
-            return False
-
-        after = text[end:end + 40].casefold()
-
-        if re.match(
-            r"\s+(programming|developer|development|language)\b",
-            after,
-        ):
-            return True
-
-        return has_technical_context(sentence)
-
-    if alias_lower == "c":
-        # C must not match inside C++ or C#.
-        if end < len(text) and text[end] in "+#":
-            return False
-
-        return has_technical_context(sentence)
-
-    if alias_lower == "r":
-        return has_technical_context(sentence)
-
-    return has_technical_context(sentence)
-
+    return True
 
 def match_skills(text: str) -> list[dict[str, Any]]:
-    """Find skill occurrences and retain the best alias per character span."""
+    """Find skill occurrences and suppress overlapping aliases."""
 
     if not isinstance(text, str) or not text.strip():
         return []
 
     skills = load_skills()
     sentences = split_sentences(text)
-    results = []
+    url_pattern = re.compile(r"https?://\S+", re.IGNORECASE)
+    url_ranges = [m.span() for m in url_pattern.finditer(text)]
+
+    candidates = []
 
     for skill in skills:
         canonical = skill["name"]
@@ -227,24 +246,24 @@ def match_skills(text: str) -> list[dict[str, Any]]:
             reverse=True,
         )
 
-        matches_by_span = {}
-
         for alias in aliases:
             pattern = build_pattern(alias)
 
             for match in pattern.finditer(text):
                 start, end = match.span()
 
-                if not has_alias_context(
-                    text,
-                    start,
-                    end,
-                    alias,
-                    sentences,
+                if any(
+                    url_start <= start < url_end
+                    for url_start, url_end in url_ranges
                 ):
                     continue
 
-                candidate = {
+                if not has_alias_context(
+                    text, start, end, alias, sentences
+                ):
+                    continue
+
+                candidates.append({
                     "name": canonical,
                     "competency": skill["competency"],
                     "matched_text": match.group(),
@@ -252,37 +271,36 @@ def match_skills(text: str) -> list[dict[str, Any]]:
                     "start": start,
                     "end": end,
                     "sentence": find_sentence(start, sentences),
-                }
+                })
 
-                span = (start, end)
-                existing = matches_by_span.get(span)
-
-                if existing is None:
-                    matches_by_span[span] = candidate
-                else:
-                    candidate_rank = (
-                        alias.casefold() != canonical.casefold(),
-                        -len(alias),
-                    )
-                    existing_rank = (
-                        existing["alias"].casefold()
-                        != canonical.casefold(),
-                        -len(existing["alias"]),
-                    )
-
-                    if candidate_rank < existing_rank:
-                        matches_by_span[span] = candidate
-
-        results.extend(matches_by_span.values())
-
-    results.sort(
+    # Prefer the longest span at a given location. This prevents
+    # "C programming" and "C" being counted twice at the same start.
+    candidates.sort(
         key=lambda item: (
             item["start"],
-            item["end"],
-            item["name"],
+            -(item["end"] - item["start"]),
+            item["alias"].casefold() != item["name"].casefold(),
         )
     )
 
+    results = []
+
+    for candidate in candidates:
+        start, end = candidate["start"], candidate["end"]
+
+        # Suppress a shorter overlapping alias, such as "C" when
+        # "C programming" already matched the same span.
+        overlaps = any(
+            candidate["name"] == existing["name"]
+            and start < existing["end"]
+            and end > existing["start"]
+            for existing in results
+        )
+
+        if not overlaps:
+            results.append(candidate)
+
+    results.sort(key=lambda item: (item["start"], item["end"], item["name"]))
     return results
 
 
@@ -295,18 +313,15 @@ if __name__ == "__main__":
         "Experience with Node.js and .NET is preferred.",
         "Power BI reporting and Business Intelligence analysis.",
         "The candidate has C programming and R programming experience.",
+        "JavaScript and JS are required.",
+        "My profile: https://github.com/example",
+        "Version Control and Tools: Git, GitHub, VS Code, Postman",
     ]
 
     for example in examples:
         print(f"\nText: {example}")
 
-        matches = match_skills(example)
-
-        if not matches:
-            print("  No skills found.")
-            continue
-
-        for item in matches:
+        for item in match_skills(example):
             print(
                 f"  {item['name']} "
                 f"(matched: {item['matched_text']!r}, "
