@@ -1,11 +1,13 @@
 import React, { useMemo } from 'react';
 import { useApp } from '../../context/AppContext';
+import { getExpectedAnswer } from '../../services/answerEvaluation';
 import {
   Award,
   Printer,
   RotateCcw,
   ArrowLeft,
   MessageSquare,
+  CheckCircle2,
 } from 'lucide-react';
 
 export function Stage4CandidateScore({ onBack, onRestart }) {
@@ -386,13 +388,46 @@ export function Stage4CandidateScore({ onBack, onRestart }) {
                     {q.question}
                   </div>
 
+                  {/* Expected Benchmark Answer */}
+                  <div
+                    style={{
+                      background: '#F0FDF4',
+                      padding: '9px 12px',
+                      borderRadius: 'var(--radius-xs)',
+                      border: '1px solid #BBF7D0',
+                      borderLeft: '3.5px solid #16A34A',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 3,
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 10.5,
+                        fontWeight: 700,
+                        color: '#15803D',
+                        textTransform: 'uppercase',
+                        letterSpacing: 0.5,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 4,
+                      }}
+                    >
+                      <CheckCircle2 size={12} /> Expected Answer / Benchmark Criteria:
+                    </div>
+                    <div style={{ fontSize: 12, color: '#166534', lineHeight: 1.45 }}>
+                      {q.expectedAnswer || getExpectedAnswer(q)}
+                    </div>
+                  </div>
+
                   {/* Answer Given by Candidate */}
                   <div
                     style={{
                       background: '#FFFFFF',
-                      padding: '8px 12px',
+                      padding: '9px 12px',
                       borderRadius: 'var(--radius-xs)',
                       border: '1px solid var(--color-border)',
+                      borderLeft: '3.5px solid var(--color-primary)',
                       display: 'flex',
                       flexDirection: 'column',
                       gap: 3,
@@ -407,13 +442,27 @@ export function Stage4CandidateScore({ onBack, onRestart }) {
                         letterSpacing: 0.5,
                         display: 'flex',
                         alignItems: 'center',
-                        gap: 4,
+                        justifyContent: 'space-between',
                       }}
                     >
-                      <MessageSquare size={12} /> Answer Given by Candidate:
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <MessageSquare size={12} /> Answer Given by Candidate:
+                      </span>
+                      {q.evaluationFeedback && (
+                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--color-text-secondary)', textTransform: 'none' }}>
+                          {q.evaluationFeedback}
+                        </span>
+                      )}
                     </div>
-                    <div style={{ fontSize: 12, color: 'var(--color-text-main)', lineHeight: 1.45 }}>
-                      {q.candidateAnswer || 'No response recorded.'}
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: (q.candidateAnswer && q.candidateAnswer.trim()) ? 'var(--color-text-main)' : 'var(--color-text-secondary)',
+                        lineHeight: 1.45,
+                        fontStyle: (q.candidateAnswer && q.candidateAnswer.trim()) ? 'normal' : 'italic',
+                      }}
+                    >
+                      {(q.candidateAnswer && q.candidateAnswer.trim()) || 'No response recorded for this question.'}
                     </div>
                   </div>
                 </div>

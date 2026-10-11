@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useApp } from '../../context/AppContext';
-import { evaluateCandidateAnswer, getExpectedAnswer } from '../../utils/answerEvaluation';
+import { evaluateCandidateAnswer, getExpectedAnswer } from '../../services/answerEvaluation';
 import {
   ArrowLeft,
   ChevronRight,
