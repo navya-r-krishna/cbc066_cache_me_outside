@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useApp } from '../../context/AppContext';
+import { evaluateCandidateAnswer, getExpectedAnswer } from '../../utils/answerEvaluation';
 import {
   ArrowLeft,
   ChevronRight,
@@ -10,16 +11,6 @@ import {
   FileText,
   Sparkles,
 } from 'lucide-react';
-
-// Default realistic sample candidate responses for seamless testing & demonstration
-const DEFAULT_CANDIDATE_ANSWERS = {
-  0: "In our production React 19 application, I architected state virtualization using custom Zustand stores with shallow selectors to prevent cascading re-renders across the dashboard layout. We virtualize large telemetry feeds using @tanstack/react-virtual, maintaining less than 40 mounted DOM nodes at any time and capping peak memory consumption to under 85MB.",
-  1: "We enforce strict TypeScript configurations across our monorepo with noImplicitAny, strictNullChecks, and exactOptionalPropertyTypes. All external API inputs pass through Zod schemas at runtime boundaries, converting untrusted JSON payloads into strictly typed discriminated unions before reaching core domain handlers.",
-  2: "When profiling high-frequency WebSocket streams, I inspect server backpressure queues and use Chrome DevTools Memory Profiler to track retainers. We diagnosed a bottleneck in unbounded buffering and resolved it by implementing client-side batch debouncing at 60Hz and dropping stale frames during backpressure.",
-  3: "For modular micro-frontends, we decoupled our core client into independently deployable federated modules using Webpack Module Federation. Each module runs an autonomous CI/CD pipeline with backward-compatible contract testing and shared core dependencies to prevent duplicate bundle bloat.",
-  4: "When balancing speed against technical debt, I distinguish between reversible two-way doors and irreversible architectural choices. If a shortcut is unavoidable, we document it in our repository as an architectural decision record (ADR) and log a scheduled tech-debt backlog ticket with an explicit SLA.",
-  5: "I chair weekly engineering RFC review sessions where senior developers review proposed technical changes. We define clear evaluation rubrics, document alternative approaches, and ensure consistent design patterns across all engineering pods.",
-};
 
 export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
   const {
@@ -43,17 +34,11 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
   // Question index selection (Question 1, Question 2, etc.)
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
 
-  // Candidate answers state initialized from workflowData or defaults
+  // Candidate answers state initialized empty (no pre-filled answers)
   const [candidateAnswers, setCandidateAnswers] = useState(() => {
     const initial = {};
-    questions.forEach((q, idx) => {
-      if (q.candidateAnswer) {
-        initial[q.id] = q.candidateAnswer;
-      } else if (workflowData.candidateAnswers && workflowData.candidateAnswers[q.id]) {
-        initial[q.id] = workflowData.candidateAnswers[q.id];
-      } else {
-        initial[q.id] = DEFAULT_CANDIDATE_ANSWERS[idx % 6] || '';
-      }
+    questions.forEach((q) => {
+      initial[q.id] = q.candidateAnswer || workflowData.candidateAnswers?.[q.id] || '';
     });
     return initial;
   });
@@ -70,33 +55,31 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
     }));
   };
 
-  // Score candidate answer dynamically based on depth & technical substance (84 - 96%)
-  const calculateAnswerScore = (answerText, idx) => {
-    if (!answerText || answerText.trim().length === 0) return 60;
-    const len = answerText.trim().length;
-    const base = 85;
-    const bonus = Math.min(9, Math.floor(len / 35));
-    const variation = (idx * 3) % 4;
-    return Math.min(96, Math.max(72, base + bonus + variation));
-  };
-
-  // Submit and advance to Stage 4 (Candidate Scorecard)
+  // Submit, evaluate against expected answers, allocate scores, and advance to Stage 4
   const handleProceed = () => {
-    // Package questions with candidate answers, individual scores, and candidate name
-    const updatedQuestions = questions.map((q, idx) => {
-      const ans = candidateAnswers[q.id] || DEFAULT_CANDIDATE_ANSWERS[idx % 6] || '';
-      const score = calculateAnswerScore(ans, idx);
+    // Compare candidate answers against original expected answers
+    const updatedQuestions = questions.map((q) => {
+      const ans = (candidateAnswers[q.id] || '').trim();
+      const evaluation = evaluateCandidateAnswer(ans, q);
       return {
         ...q,
         candidateAnswer: ans,
-        candidateScore: score,
+        candidateScore: evaluation.score,
+        expectedAnswer: evaluation.expectedAnswer,
+        evaluationFeedback: evaluation.feedback,
+        matchPercentage: evaluation.matchPercentage,
         candidateName,
       };
     });
 
-    // Calculate overall fit score from average of answer scores
-    const totalScore = updatedQuestions.reduce((acc, q) => acc + (q.candidateScore || 88), 0);
-    const overallFitScore = Math.round(totalScore / Math.max(1, updatedQuestions.length));
+    // Calculate score from candidate answers
+    const answeredList = updatedQuestions.filter((q) => (q.candidateAnswer || '').length > 0);
+    const averageAnswerScore = answeredList.length > 0
+      ? Math.round(answeredList.reduce((acc, q) => acc + q.candidateScore, 0) / answeredList.length)
+      : 70;
+
+    const resumeScore = workflowData.candidateSummary?.comparison?.score || workflowData.candidateSummary?.score || 85;
+    const overallFitScore = Math.round(0.30 * resumeScore + 0.70 * averageAnswerScore);
 
     updateWorkflowData({
       generatedQuestions: updatedQuestions,
@@ -105,13 +88,14 @@ export function Stage3Questions({ onBack, onProceedToScore, onRestart }) {
         ...(workflowData.candidateSummary || {}),
         candidateName,
         score: overallFitScore,
+        interviewScore: averageAnswerScore,
       },
     });
 
     addToast({
       type: 'success',
       title: 'Answers Evaluated',
-      message: `Recorded answers for ${updatedQuestions.length} questions. Advancing to Candidate Scorecard.`,
+      message: `Evaluated ${answeredCount} of ${total} answers against benchmark criteria. Advancing to Scorecard.`,
     });
 
     if (onProceedToScore) {
